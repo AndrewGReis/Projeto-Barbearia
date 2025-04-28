@@ -3,7 +3,6 @@ import logging
 from pathlib import Path
 import os
 
-# Configuração de logging
 logging.basicConfig(
     filename='./servicos_barbearia.log',
     level=logging.DEBUG,
@@ -11,10 +10,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger()
 
-# Arquivo CSV para armazenamento
 DATABASE = "servicos_barbearia.csv"
 
-# Dicionário de serviços pré-definidos
 SERVICOS_PREDEFINIDOS = {
     'maquina': 20,
     'maquina2': 25,
@@ -123,7 +120,6 @@ def listar_servicos(df: pd.DataFrame):
             print("\nNenhum serviço registrado hoje.")
             return
         
-        # Garante que os valores são numéricos
         df['Preco'] = pd.to_numeric(df['Preco'], errors='coerce')
         df['Quantidade'] = pd.to_numeric(df['Quantidade'], errors='coerce')
         df['Total'] = df['Preco'] * df['Quantidade']
@@ -156,7 +152,6 @@ def resumo_diario(df: pd.DataFrame):
             print("\nNenhum serviço registrado hoje.")
             return
         
-        # Garante que os valores são numéricos
         df['Preco'] = pd.to_numeric(df['Preco'], errors='coerce')
         df['Quantidade'] = pd.to_numeric(df['Quantidade'], errors='coerce')
         
