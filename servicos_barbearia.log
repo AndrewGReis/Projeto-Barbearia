@@ -1,0 +1,25 @@
+2025-04-28 18:38:28,584 - root - INFO - === Sistema de Barbearia Iniciado ===
+2025-04-28 18:38:28,585 - root - INFO - Criando novo DataFrame de servicos
+2025-04-28 18:38:35,218 - root - INFO - Registrando servico: maquina - R$20.00
+2025-04-28 18:38:35,224 - root - INFO - Salvando servicos no arquivo CSV
+2025-04-28 18:38:37,451 - root - INFO - Registrando servico: social - R$30.00
+2025-04-28 18:38:37,455 - root - INFO - Salvando servicos no arquivo CSV
+2025-04-28 18:38:39,000 - root - INFO - Listagem de servicos solicitada
+2025-04-28 18:38:41,786 - root - INFO - Resumo diario solicitado
+2025-04-28 18:38:46,908 - root - INFO - Registrando servico: maquina2 - R$25.00
+2025-04-28 18:38:46,916 - root - INFO - Salvando servicos no arquivo CSV
+2025-04-28 18:38:49,036 - root - INFO - Registrando servico: barba - R$15.00
+2025-04-28 18:38:49,046 - root - INFO - Salvando servicos no arquivo CSV
+2025-04-28 18:38:51,977 - root - DEBUG - Comando nao reconhecido
+2025-04-28 18:39:01,363 - root - INFO - Mostrando lista de comandos
+2025-04-28 18:39:05,081 - root - INFO - Remocao de servico solicitada
+2025-04-28 18:39:05,084 - root - INFO - Servico removido: barba
+2025-04-28 18:39:05,085 - root - INFO - Salvando servicos no arquivo CSV
+2025-04-28 18:39:08,818 - root - INFO - Registrando servico: barba - R$15.00
+2025-04-28 18:39:08,823 - root - INFO - Salvando servicos no arquivo CSV
+2025-04-28 18:39:10,667 - root - INFO - Registrando servico: social - R$30.00
+2025-04-28 18:39:10,670 - root - INFO - Salvando servicos no arquivo CSV
+2025-04-28 18:39:12,834 - root - INFO - Listagem de servicos solicitada
+2025-04-28 18:39:15,154 - root - INFO - Resumo diario solicitado
+2025-04-28 18:39:18,947 - root - INFO - === Servico encerrado ===
+2025-04-28 18:39:18,948 - root - INFO - Salvando servicos no arquivo CSV
