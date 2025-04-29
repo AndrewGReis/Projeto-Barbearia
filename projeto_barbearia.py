@@ -146,10 +146,10 @@ def listar_servicos(df: pd.DataFrame):
         raise
 
 def resumo_diario(df: pd.DataFrame):
-    """Exibe o resumo financeiro do dia."""
+    """Exibe o resumo financeiro até o momento."""
     try:
         if df.empty:
-            print("\nNenhum serviço registrado hoje.")
+            print("\nNenhum serviço registrado.")
             return
         
         df['Preco'] = pd.to_numeric(df['Preco'], errors='coerce')
@@ -159,7 +159,7 @@ def resumo_diario(df: pd.DataFrame):
         total_arrecadado = (df['Preco'] * df['Quantidade']).sum()
         
         print("\n═══════════════════════════════")
-        print("       RESUMO DO DIA       ")
+        print("       RESUMO DE SERVIÇOS ATÉ O MOMENTO       ")
         print("═══════════════════════════════")
         print(f"\n🔹 Total de serviços: {int(total_servicos)}")
         print(f"🔹 Valor arrecadado: R${float(total_arrecadado):.2f}")
@@ -200,8 +200,21 @@ def main():
     print("\n=== GERENCIADOR DE BARBEARIA ===")
     mostrar_ajuda()
     
+    loop_count = 0
+    MAX_LOOPS = 200  #limite de loops para evitar loops infinitos
+    
     while True:
         try:
+            loop_count += 1
+            logger.debug(f"Loop {loop_count}/{MAX_LOOPS} - Aguardando comando...")
+            
+            # Encerra se ultrapassar o limite (possível loop infinito)
+            if loop_count >= MAX_LOOPS:
+                logger.error("Limite máximo de loops atingido! Encerrando por seguranca.")
+                print("\n⚠️ Limite de operações excedido. Reinicie o programa.")
+                salvar_servicos(df)
+                break
+            
             user_input = input("\nDigite um comando (ou 'sair' para encerrar): ").strip().lower()
             
             if not user_input:
@@ -211,7 +224,7 @@ def main():
             command = parts[0]
             
             if command == 'sair':
-                logger.info("=== Servico encerrado ===")
+                logger.info("=== Servico encerrado pelo usuario ===")
                 print("Encerrando o programa...")
                 salvar_servicos(df)
                 break
@@ -219,32 +232,37 @@ def main():
             elif command == 'help':
                 logger.info("Mostrando lista de comandos")
                 mostrar_ajuda()
+                loop_count = 0  # reseta a contagem de loops após comando válido
                 
             elif command == 'add':
                 if len(parts) < 2:
-                    logger.info("Formato incorreto no comando add")
+                    logger.warning("Formato incorreto no comando 'add'")
                     print("Formato incorreto. Uso: add servico")
                     continue
                 
                 servico = parts[1]
                 df = adicionar_servico(servico, df)
                 salvar_servicos(df)
+                loop_count = 0
                 
             elif command == 'remover':
                 logger.info("Remocao de servico solicitada")
                 df = remover_ultimo_servico(df)
                 salvar_servicos(df)
+                loop_count = 0
                 
             elif command == 'list':
                 logger.info("Listagem de servicos solicitada")
                 listar_servicos(df)
+                loop_count = 0
                 
             elif command == 'resumo':
                 logger.info("Resumo diario solicitado")
                 resumo_diario(df)
+                loop_count = 0
                 
             else:
-                logger.debug("Comando nao reconhecido")
+                logger.warning(f"Comando nao reconhecido: {command}")
                 print("Comando não reconhecido. Digite 'help' para ajuda.")
                 
         except Exception as e:
