@@ -202,7 +202,7 @@ def main():
     
     loop_count = 0
     MAX_LOOPS = 200  #limite de loops para evitar loops infinitos
-    
+
     while True:
         try:
             loop_count += 1
@@ -210,7 +210,7 @@ def main():
             
             # Encerra se ultrapassar o limite (possível loop infinito)
             if loop_count >= MAX_LOOPS:
-                logger.error("Limite máximo de loops atingido! Encerrando por seguranca.")
+                logger.error("Limite maximo de loops atingido! Encerrando por seguranca.")
                 print("\n⚠️ Limite de operações excedido. Reinicie o programa.")
                 salvar_servicos(df)
                 break
