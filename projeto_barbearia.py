@@ -6,7 +6,7 @@ import os
 logging.basicConfig(
     filename='./servicos_barbearia.log',
     level=logging.DEBUG,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format='%(asctime)s - %(name)s - %(levelname)s - %(lineno)d - %(message)s'
 )
 logger = logging.getLogger()
 
