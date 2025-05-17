@@ -44,7 +44,7 @@ Automação para registro de serviços prestados em barbearia, com cálculo de v
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **Python 3**
+- **Python**
 - Bibliotecas:
   - `pandas` para manipulação de dados
   - `logging` para registro de logs
