@@ -1,4 +1,4 @@
-# ✂️ Gerenciador de Serviços de Barbearia
+# ✂️ Gerenciador de Serviços de Barbearia  ✂️
 
 Automação para registro de serviços prestados em barbearia, com cálculo de valores, relatórios diários e armazenamento em CSV.
 
@@ -30,16 +30,24 @@ Automação para registro de serviços prestados em barbearia, com cálculo de v
 
 ---
 
-## 💈 Serviços Pré-definidos e Preços
+## 📋  Serviços Pré-definidos e Preços  🧾
 
-| Serviço  | Preço (R$) |
-| -------- | ---------- |
-| maquina  | 20,00      |
-| maquina2 | 25,00      |
-| barba    | 15,00      |
-| tintura  | 40,00      |
-| social   | 30,00      |
-
+| Serviço                   | Preço (R$) |
+| ------------------------- | ---------- |
+| corte_masculino           | 35,00      |
+| barba                     | 25,00      |
+| acabamento_pezinho        | 10,00      |
+| pigmentacao               | 20,00      |
+| sobrancelhas              | 10,00      |
+| barboterapia              | 35,00      |
+| depilacao_nariz_orelha    | 20,00      |
+| selagem                   | 80,00      |
+| limpeza_pele              | 50,00      |
+| hidratacao                | 15,00      |
+| reflexo                   | 50,00      |
+| platinado                 | 100,00     |
+| camuflagem_cabelo         | 20,00      |
+| camuflagem_barba          | 10,00      |
 ---
 
 ## 🛠️ Tecnologias Utilizadas
