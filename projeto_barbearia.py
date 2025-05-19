@@ -2,53 +2,110 @@ import pandas as pd
 import logging
 from pathlib import Path
 import os
+from datetime import datetime
 
+PASTA_PLANILHAS = "planilhas_de_servico"
+PASTA_LOGS = "logs"
+DATA_ATUAL = datetime.now().strftime("%d%m%Y")
+NOME_ARQUIVO_PADRAO = f"balanco_diario{DATA_ATUAL}.csv"
+CAMINHO_COMPLETO = os.path.join(PASTA_PLANILHAS, NOME_ARQUIVO_PADRAO)
+ARQUIVO_LOG = os.path.join(PASTA_LOGS, "servicos_barbearia.log")
+
+os.makedirs(PASTA_LOGS, exist_ok=True)
 logging.basicConfig(
-    filename='./servicos_barbearia.log',
+    filename=ARQUIVO_LOG,
     filemode='a',
     level=logging.DEBUG,
     format='%(asctime)s - %(name)s - %(levelname)s - %(funcName)s - %(message)s'
 )
 logger = logging.getLogger()
 
-DATABASE = "servicos_barbearia.csv"
-
 SERVICOS_PREDEFINIDOS = {
-    'maquina': 20,
-    'maquina2': 25,
-    'barba': 15,
-    'tintura': 40,
-    'social': 30
+    'corte_masculino': 35,
+    'barba': 25,
+    'acabamento_pezinho': 10,
+    'pigmentacao': 20,
+    'sobrancelhas': 10,
+    'barboterapia': 35,
+    'depilacao_nariz_orelha': 20,
+    'selagem': 80,
+    'limpeza_pele': 50,
+    'hidratacao': 15,
+    'reflexo': 50,
+    'platinado': 100,
+    'camuflagem_cabelo': 20,
+    'camuflagem_barba': 10
 }
 
+def selecionar_arquivo() -> str:
+    """Gerencia a seleção/criação do arquivo CSV na pasta especificada"""
+    os.makedirs(PASTA_PLANILHAS, exist_ok=True)
+    
+    arquivos_existentes = [f for f in os.listdir(PASTA_PLANILHAS) 
+                         if f.startswith("balanco_diario") and f.endswith(".csv")]
+    arquivos_existentes.sort(reverse=True)
+    
+    if arquivos_existentes:
+        print("\nArquivos disponíveis na pasta 'planilhas_de_servico':")
+        for i, arquivo in enumerate(arquivos_existentes[:5], 1):
+            print(f"{i} - {arquivo}")
+        
+        resposta = input("\nDeseja usar o último arquivo criado "
+                        f"({arquivos_existentes[0]}) ou criar um novo? "
+                        "(antigo/novo): ").strip().lower()
+        
+        if resposta == 'antigo':
+            return os.path.join(PASTA_PLANILHAS, arquivos_existentes[0])
+    
+    return CAMINHO_COMPLETO
+
 def inicializar_base_dados() -> pd.DataFrame:
-    """Pergunta ao usuário se deseja excluir o CSV existente e criar um novo."""
-    if Path(DATABASE).exists():
-        resposta = input(f"\n⚠️ O arquivo '{DATABASE}' já existe. Deseja apagar e começar um novo? (s/n): ").strip().lower()
-        if resposta == 's':
-            try:
-                os.remove(DATABASE)
-                logger.info("Arquivo CSV existente foi excluído a pedido do usuário.")
-                print("🆕 Novo arquivo será criado. Dados antigos foram apagados.")
-                return pd.DataFrame(columns=['Servico', 'Preco', 'Quantidade'])
-            except Exception as e:
-                logger.error(f"Erro ao excluir arquivo existente: {e}")
-                print(f"Erro ao excluir o arquivo existente: {e}")
-                return carregar_servicos()
-        else:
-            logger.info("Usuario optou por manter o arquivo CSV existente.")
-            print("✅ Arquivo existente será utilizado normalmente.")
-            return carregar_servicos()
+    """Inicializa o DataFrame, verificando arquivo existente ou criando novo"""
+    database_path = selecionar_arquivo()
+    
+    if Path(database_path).exists():
+        try:
+            logger.info(f"Carregando servicos do arquivo {database_path}")
+            df = pd.read_csv(database_path, encoding='utf-8-sig')
+            df.columns = df.columns.str.strip().str.lower()
+            df = df.rename(columns={
+                'serviço': 'Servico',
+                'preço (r$)': 'Preco',
+                'quantidade': 'Quantidade'
+            })
+            df['Preco'] = pd.to_numeric(df['Preco'], errors='coerce').fillna(0)
+            df['Quantidade'] = pd.to_numeric(df['Quantidade'], errors='coerce').fillna(0)
+            print(f"\n✅✅ Arquivo existente carregado: {os.path.basename(database_path)}")
+            return df[['Servico', 'Preco', 'Quantidade']]
+        except Exception as e:
+            logger.error(f"Erro ao carregar arquivo existente: {e}")
+            print(f"\n❌❌ Erro ao carregar arquivo existente. \nCriando novo...✅✅")
+            return pd.DataFrame(columns=['Servico', 'Preco', 'Quantidade'])
     else:
-        logger.info("Arquivo CSV nao encontrado. Novo sera criado.")
-        print("🆕 Nenhum arquivo existente. Novo será criado.")
+        logger.info(f"Arquivo {database_path} nao encontrado. Novo sera criado.")
+        print(f"\n🆕 Criando novo arquivo: {os.path.basename(database_path)}")
         return pd.DataFrame(columns=['Servico', 'Preco', 'Quantidade'])
+
+def salvar_servicos(df: pd.DataFrame):
+    try:
+        logger.info(f"✅ Salvando servicos no arquivo {CAMINHO_COMPLETO}")
+        df.to_csv(
+            CAMINHO_COMPLETO,
+            mode='w',
+            index=False,
+            columns=['Servico', 'Preco', 'Quantidade'],
+            header=['Serviço', 'Preço (R$)', 'Quantidade'],
+            encoding='utf-8-sig'
+        )
+    except Exception as e:
+        logger.error(f"Falha ao salvar servicos: {e}")
+        raise
 
 def carregar_servicos() -> pd.DataFrame:
     try:
-        if Path(DATABASE).exists():
-            logger.info(f"Carregando servicos do arquivo {DATABASE}")
-            df = pd.read_csv(DATABASE, encoding='utf-8-sig')
+        if Path(CAMINHO_COMPLETO).exists():
+            logger.info(f"Carregando servicos do arquivo {CAMINHO_COMPLETO}")
+            df = pd.read_csv(CAMINHO_COMPLETO, encoding='utf-8-sig')
             df.columns = df.columns.str.strip().str.lower()
             df = df.rename(columns={
                 'serviço': 'Servico',
@@ -64,22 +121,6 @@ def carregar_servicos() -> pd.DataFrame:
     except Exception as e:
         logger.error(f"Erro ao carregar servicos: {e}")
         return pd.DataFrame(columns=['Servico', 'Preco', 'Quantidade'])
-
-def salvar_servicos(df: pd.DataFrame):
-    try:
-        logger.info("Salvando servicos no arquivo CSV")
-        os.makedirs(os.path.dirname(DATABASE) or '.', exist_ok=True)
-        df.to_csv(
-            DATABASE,
-            mode='w',
-            index=False,
-            columns=['Servico', 'Preco', 'Quantidade'],
-            header=['Serviço', 'Preço (R$)', 'Quantidade'],
-            encoding='utf-8-sig'
-        )
-    except Exception as e:
-        logger.error(f"Falha ao salvar servicos: {e}")
-        raise
 
 def adicionar_servico(servico: str, df: pd.DataFrame) -> pd.DataFrame:
     try:
@@ -156,12 +197,12 @@ def resumo_diario(df: pd.DataFrame):
         total_arrecadado = (df['Preco'] * df['Quantidade']).sum()
 
         print("\n═══════════════════════════════")
-        print("       RESUMO DE SERVIÇOS ATÉ O MOMENTO       ")
+        print("      ✂️  RESUMO DE SERVIÇOS ATÉ O MOMENTO ✂️      ")
         print("═══════════════════════════════")
-        print(f"\n🔹 Total de serviços: {int(total_servicos)}")
-        print(f"🔹 Valor arrecadado: R${float(total_arrecadado):.2f}")
+        print(f"\n📋📋 Total de serviços: {int(total_servicos)}")
+        print(f"🧾🧾 Valor arrecadado: R${float(total_arrecadado):.2f}")
 
-        print("\n🔸 Serviços prestados:")
+        print("\n📋📋 Serviços prestados:")
         for _, row in df.iterrows():
             print(f" - {row['Servico']}: {int(row['Quantidade'])}x (R${float(row['Preco']):.2f} cada)")
         print("\n═══════════════════════════════")
@@ -171,7 +212,7 @@ def resumo_diario(df: pd.DataFrame):
 
 def mostrar_ajuda():
     help_text = """
-GERENCIADOR DE BARBEARIA - COMANDOS:
+✂️  GERENCIADOR DE BARBEARIA - COMANDOS:✂️
 
 add servico      Registra um serviço prestado
 remover          Remove o último serviço adicionado
@@ -186,10 +227,10 @@ SERVIÇOS PRÉ-DEFINIDOS:"""
     print(help_text)
 
 def main():
-    logger.info("=== Sistema de Barbearia Iniciado ===")
+    logger.info("===  Sistema de Barbearia Iniciado   ===")
     df = inicializar_base_dados()
 
-    print("\n=== GERENCIADOR DE BARBEARIA ===")
+    print("\n=== ✂️  GERENCIADOR DE BARBEARIA ✂️  ===")
     mostrar_ajuda()
 
     loop_count = 0
@@ -202,7 +243,7 @@ def main():
 
             if loop_count >= MAX_LOOPS:
                 logger.error("Limite maximo de loops atingido! Encerrando por seguranca.")
-                print("\n⚠️ Limite de operações excedido. Reinicie o programa.")
+                print("\n❌❌ Limite de operações excedido. \nReinicie o programa.🛡️ 🛡️")
                 salvar_servicos(df)
                 break
 
@@ -225,7 +266,7 @@ def main():
             elif command == 'add':
                 if len(parts) < 2:
                     logger.warning("Formato incorreto no comando 'add'")
-                    print("Formato incorreto. Uso: add servico")
+                    print("❌ Formato incorreto. Uso: add servico ✅")
                     continue
                 servico = parts[1]
                 df = adicionar_servico(servico, df)
