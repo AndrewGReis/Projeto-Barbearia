@@ -38,15 +38,16 @@ Sistema em desenvolvimento para gestão de serviços em barbearia com controle i
 
 ## 🚀 Como Usar
 
-| Comando       | Ação                          |
-|---------------|-------------------------------|
-| `add`         | Registra serviço para cliente |
-| `remover`     | Remove último serviço         |
-| `list`        | Lista serviços                |
-| `resumo`      | Mostra relatório              |
-| `help`        | Exibe ajuda                   |
-| `sair`        | Encerra programa              |
+```
 
+add "Nome Completo" serviço   # Registra um serviço
+remover                      # Remove o último serviço
+list                         # Lista todos serviços
+resumo                       # Mostra relatório completo
+help                         # Exibe ajuda
+sair                         # Encerra o programa
+
+```
 
 ## 📋  Serviços Pré-definidos e Preços  🧾
 
