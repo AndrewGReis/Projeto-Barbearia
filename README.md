@@ -17,7 +17,7 @@ Sistema em desenvolvimento para gestão de serviços em barbearia com controle i
 
 -## 👤  Cadastro por cliente com nome e sobrenome
 -## 🏆  Destaques automáticos do dia
--## 📈  Relatórios financeiros** aprimorados
+-## 📈  Relatórios financeiros aprimorados
 
 ### 📋 Funcionalidades Principais
 
@@ -87,14 +87,14 @@ sair                         # Encerra o programa
 ## Cliente: Carlos Oliveira  
 - selagem: 1x (R$80.00)  
 - barboterapia: 1x (R$35.00)
- **Total**: R$115.00  
+ Total: R$115.00  
 
-**Cliente: Anderson Silva**  
+Cliente: Anderson Silva  
 - reflexo: 1x (R$50.00)  
 - depilacao_nariz_orelha: 1x (R$20.00)  
 - platinado: 1x (R$100.00)  
 - selagem: 1x (R$80.00)  
-**Total**: R$250.00  
+Total: R$250.00  
 
 ═══════════════════════════════
 
