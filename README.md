@@ -38,14 +38,13 @@ Sistema em desenvolvimento para gestão de serviços em barbearia com controle i
 
 ## 🚀 Como Usar
 
-```
 add "Nome Completo" serviço   # Registra um serviço
 remover                      # Remove o último serviço
 list                         # Lista todos serviços
 resumo                       # Mostra relatório completo
 help                         # Exibe ajuda
 sair                         # Encerra o programa
-```
+
 
 ## 📋  Serviços Pré-definidos e Preços  🧾
 
