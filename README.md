@@ -110,7 +110,7 @@ sair                         # Encerra o programa
 - Logs diários em `servicos_barbearia.log` com timestamp
 
 ### 🛠️  Funcionalidades Implementadas
-- **Cadastro por Cliente Completo**:
+  - Cadastro por Cliente Completo:
   - Registro com nomes entre aspas (ex: `"João Silva"`)
   - Histórico individual de serviços por cliente
   - Compatibilidade com versões anteriores (clientes sem nome ficam como "Geral")
