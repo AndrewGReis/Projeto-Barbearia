@@ -15,9 +15,9 @@ Sistema em desenvolvimento para gestão de serviços em barbearia com controle i
 
 ## ⚙️ Funcionalidades 💻
 
-- 👤 **Cadastro por cliente** com nome e sobrenome
-- 🏆 **Destaques automáticos** do dia
-- 📈 **Relatórios financeiros** aprimorados
+-## 👤  Cadastro por cliente com nome e sobrenome
+-## 🏆  Destaques automáticos do dia
+-## 📈  Relatórios financeiros** aprimorados
 
 ### 📋 Funcionalidades Principais
 | Ícone | Descrição |
@@ -31,7 +31,7 @@ Sistema em desenvolvimento para gestão de serviços em barbearia com controle i
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **Python**
+- ## Python
 - Bibliotecas:
   - `pandas` para manipulação de dados
   - `logging` para registro de logs
