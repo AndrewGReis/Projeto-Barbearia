@@ -4,11 +4,14 @@ Sistema em desenvolvimento para gestão de serviços em barbearia com controle i
 
 ![Progresso](https://geps.dev/progress/80?style=for-the-badge&color=2ecc71)
 
+## 📂 Estrutura do Projeto
+
+```bash
 📁 Projeto-Barbearia/
-├── 📄 barbearia.py         # Código principal
-├── 📁 planilhas_de_servico/ # Armazena os CSVs
-├── 📁 logs/                # Arquivos de log
-└── 📄 README.md            # Este arquivo
+├── 📄 barbearia.py          # Código principal
+├── 📁 planilhas_de_servico/  # Armazena os CSVs diários
+├── 📁 logs/                 # Registros de operações
+└── 📄 README.md             # Documentação do projeto
 
 ## ⚙️ Funcionalidades 💻
 
