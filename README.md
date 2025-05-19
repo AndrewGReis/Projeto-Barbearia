@@ -86,7 +86,7 @@ sair                         # Encerra o programa
 
 ### 📋📋 Serviços por cliente:
 
-**Cliente: Carlos Oliveira**  
+## Cliente: Carlos Oliveira  
 - selagem: 1x (R$80.00)  
 - barboterapia: 1x (R$35.00)
  **Total**: R$115.00  
@@ -124,11 +124,11 @@ sair                         # Encerra o programa
 - Ordena por volume de serviços ou valor gasto
 
 ### 🔒 Segurança e Controle
-| Funcionalidade | Descrição |
-|---------------|-----------|
-| ⏳ Limite de Operações | 6 comandos por execução |
-| 💾 Backup Automático | Salva dados antes de operações críticas |
-| 🛡️ Tratamento de Erros | Valida nomes e serviços em tempo real |
+## Funcionalidade  Descrição 
+
+##  ⏳ Limite de Operações  6 comandos por execução 
+##  💾 Backup Automático  Salva dados antes de operações críticas 
+##  🛡️ Tratamento de Erros  Valida nomes e serviços em tempo real 
 
 ### 💾 Persistência de Dados
 ```python
