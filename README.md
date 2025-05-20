@@ -42,6 +42,7 @@ Sistema em desenvolvimento para gestão de serviços em barbearia com controle i
 - Nomenclatura: balanco_diario[DDMMAAAA].csv
 - Local: /planilhas_de_servico/
 - Logs: /logs/servicos_barbearia.log
+- Nomenclatura: servicos_barbearia[DDMMAAAA].log
 
 
  🚀 Como Usar
