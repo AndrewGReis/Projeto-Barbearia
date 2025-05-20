@@ -1,34 +1,50 @@
-# ✂️ Gerenciador de Serviços de Barbearia  ✂️
+# ✂️ Gerenciador de Serviços de Barbearia ✂️
 
-Automação para registro de serviços prestados em barbearia, com cálculo de valores, relatórios diários e armazenamento em CSV.
+Sistema em desenvolvimento para gestão de serviços em barbearia com controle individual por cliente, relatórios financeiros detalhados e armazenamento seguro de dados.
 
----
+![Progresso](https://geps.dev/progress/80?style=for-the-badge&color=2ecc71)
 
-## ⚙️ Funcionalidades
+## 📂 Estrutura do Projeto
 
-- 📝 **Registro automático de serviços** (com preços pré-definidos e incremento automático da quantidade)
-- 🗑️ **Remoção do último serviço adicionado** (remover o serviço mais recente da lista)
-- 📊 **Relatórios detalhados:**
-  - 📋 Listagem em tabela dos serviços com preço unitário, quantidade e total por serviço
-  - 💰 Resumo financeiro diário com total arrecadado e total de serviços prestados
-- 📁 **Persistência de dados em arquivo CSV** compatível com Excel, com possibilidade de manter ou recriar a base a cada execução
-- 📌 **Logging completo** para rastreamento de operações, erros e eventos importantes
-- 🔐 Controle de limite de operações por execução para segurança
+```bash
+📁 Projeto-Barbearia/
+├── 📄 barbearia.py          # Código principal
+├── 📁 planilhas_de_servico/ # Armazena os CSVs diários
+├── 📁 logs/                 # Registros de operações
+└── 📄 README.md             # Documentação do projeto
 
----
+## ⚙️ Funcionalidades 💻
 
-## 📋 Comandos disponíveis
+-## 👤  Cadastro por cliente com nome e sobrenome
+-## 🏆  Destaques automáticos do dia
+-## 📈  Relatórios financeiros aprimorados
 
-| Comando   | Descrição                              |
-| --------- | ------------------------------------ |
-| `add <servico>`  | Adiciona um serviço prestado (exemplo: `add maquina`) |
-| `remover` | Remove o último serviço registrado    |
-| `list`    | Mostra a lista detalhada dos serviços |
-| `resumo`  | Exibe resumo financeiro do dia        |
-| `help`    | Exibe esta lista de comandos           |
-| `sair`    | Encerra o programa                    |
+### 📋 Funcionalidades Principais
 
----
+##  📝  Registro de serviços com preços pré-definidos 
+##  🔄  Incremento automático de quantidade para serviços repetidos 
+##  🗑️  Opção de Remoção do último serviço adicionado 
+##  📊  Relatórios detalhados em formato de tabela 
+##  💾  Armazenamento em CSV com compatibilidade Excel 
+##  📌  Sistema completo de logs de operações 
+
+## 🛠️ Tecnologias Utilizadas
+
+- ## Python
+- Bibliotecas:
+  - `pandas` para manipulação de dados
+  - `logging` para registro de logs
+  - `pathlib` e `os` para manipulação de arquivos
+
+## 🚀 Como Usar
+
+add "Nome Completo" serviço  # Registra um serviço
+remover                      # Remove o último serviço
+list                         # Lista todos serviços
+resumo                       # Mostra relatório completo
+help                         # Exibe ajuda
+sair                         # Encerra o programa
+
 
 ## 📋  Serviços Pré-definidos e Preços  🧾
 
@@ -37,7 +53,7 @@ Automação para registro de serviços prestados em barbearia, com cálculo de v
 | corte_masculino           | 35,00      |
 | barba                     | 25,00      |
 | acabamento_pezinho        | 10,00      |
-| pigmentacao               | 20,00      |
+| pigmentacao               | 35,00      |
 | sobrancelhas              | 10,00      |
 | barboterapia              | 35,00      |
 | depilacao_nariz_orelha    | 20,00      |
@@ -50,24 +66,72 @@ Automação para registro de serviços prestados em barbearia, com cálculo de v
 | camuflagem_barba          | 10,00      |
 ---
 
-## 🛠️ Tecnologias Utilizadas
 
-- **Python**
-- Bibliotecas:
-  - `pandas` para manipulação de dados
-  - `logging` para registro de logs
-  - `pathlib` e `os` para manipulação de arquivos
+### 🏆 Destaques Automáticos
+═══════════════════════════════
+      ✂️ RESUMO DIÁRIO ✂️      
+═══════════════════════════════
+### Exemplo da Funcionalidade 
+### 📋📋 Total de serviços: 9  
+### 🧾🧾 Valor arrecadado: R$525.00
 
----
+### 🏆 DESTAQUES:  
+### 👑 Cliente Top: André Silva (8 serviços)  
+### 💰 Maior Gasto: Anderson Silva (R$250.00) 
+
+### 🔍 Detalhamento por Cliente:
+# Exemplo:
+
+### 📋📋 Serviços por cliente:
+
+## Cliente: Carlos Oliveira  
+- selagem: 1x (R$80.00)  
+- barboterapia: 1x (R$35.00)
+ Total: R$115.00  
+
+Cliente: Anderson Silva  
+- reflexo: 1x (R$50.00)  
+- depilacao_nariz_orelha: 1x (R$20.00)  
+- platinado: 1x (R$100.00)  
+- selagem: 1x (R$80.00)  
+Total: R$250.00  
+
+═══════════════════════════════
+
+═══════════════════════════════
 
 ## ⚙️ Detalhes de Implementação
 
-- Ao iniciar, o sistema verifica se o arquivo `servicos_barbearia.csv` existe. Caso exista, o usuário pode optar por manter ou apagar o arquivo para começar um novo.
-- Os dados são armazenados em um DataFrame do pandas com as colunas: Serviço, Preço e Quantidade.
-- Adicionar um serviço aumenta a quantidade caso o serviço já tenha sido registrado anteriormente.
-- O relatório de listagem mostra o preço unitário, quantidade e total por serviço, além do total geral.
-- O resumo diário exibe o total de serviços prestados e o total arrecadado até o momento.
-- Logs detalhados são salvos em `servicos_barbearia.log`, incluindo erros, ações do usuário e eventos importantes.
-- Para segurança, o programa limita o número de comandos por execução para evitar loops infinitos.
+### 📂 Sistema de Arquivos
+- Verificação automática do arquivo `balanco_diario[DATA].csv` ao iniciar
+- Opção de continuar com arquivo existente ou criar novo
+- Logs diários em `servicos_barbearia.log` com timestamp
 
----
+### 🛠️  Funcionalidades Implementadas
+  - Cadastro por Cliente Completo:
+  - Registro com nomes entre aspas (ex: `"João Silva"`)
+  - Histórico individual de serviços por cliente
+  - Compatibilidade com versões anteriores (clientes sem nome ficam como "Geral")
+
+  # Nova estrutura do DataFrame:
+  Colunas: [Cliente, Serviço, Preço, Quantidade, Total]
+
+### 👥 Agrupamento Inteligente
+- Agrupa serviços por cliente automaticamente
+- Calcula totais individuais e comparativos
+- Ordena por volume de serviços ou valor gasto
+
+### 🔒 Segurança e Controle
+## Funcionalidade  Descrição 
+
+##  ⏳ Limite de Operações  6 comandos por execução 
+##  💾 Backup Automático  Salva dados antes de operações críticas 
+##  🛡️ Tratamento de Erros  Valida nomes e serviços em tempo real 
+
+### 💾 Persistência de Dados
+```python
+# Estrutura de armazenamento:
+- Formato: CSV com UTF-8-sig (Excel compatível)
+- Nomenclatura: balanco_diario[DDMMAAAA].csv
+- Local: /planilhas_de_servico/
+- Logs: /logs/servicos_barbearia.log
