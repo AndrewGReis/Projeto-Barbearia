@@ -53,7 +53,7 @@ sair                         # Encerra o programa
 | corte_masculino           | 35,00      |
 | barba                     | 25,00      |
 | acabamento_pezinho        | 10,00      |
-| pigmentacao               | 20,00      |
+| pigmentacao               | 35,00      |
 | sobrancelhas              | 10,00      |
 | barboterapia              | 35,00      |
 | depilacao_nariz_orelha    | 20,00      |
