@@ -84,7 +84,7 @@ sair                         # Encerra o programa
 
 ### 📋📋 Serviços por cliente:
 
-## Cliente: Carlos Oliveira  
+Cliente: Carlos Oliveira  
 -# selagem: 1x (R$80.00)  
 -# barboterapia: 1x (R$35.00)
 -# Total: R$115.00  
