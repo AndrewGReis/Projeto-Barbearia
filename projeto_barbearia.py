@@ -24,7 +24,7 @@ SERVICOS_PREDEFINIDOS = {
     'corte_masculino': 35,
     'barba': 25,
     'acabamento_pezinho': 10,
-    'pigmentacao': 20,
+    'pigmentacao': 35,
     'sobrancelhas': 10,
     'barboterapia': 35,
     'depilacao_nariz_orelha': 20,
