@@ -4,24 +4,30 @@ from pathlib import Path
 import os
 from datetime import datetime
 
-
 PASTA_PLANILHAS = "planilhas_de_servico"
 PASTA_LOGS = "logs"
 DATA_ATUAL = datetime.now().strftime("%d%m%Y")
 NOME_ARQUIVO_PADRAO = f"balanco_diario{DATA_ATUAL}.csv"
 CAMINHO_COMPLETO = os.path.join(PASTA_PLANILHAS, NOME_ARQUIVO_PADRAO)
-ARQUIVO_LOG = os.path.join(PASTA_LOGS, "servicos_barbearia.log")
-
+NOME_ARQUIVO_LOG = f"servicos_barbearia_{DATA_ATUAL}.log"
+ARQUIVO_LOG = os.path.join(PASTA_LOGS, NOME_ARQUIVO_LOG)
 ARQUIVO_SELECIONADO = None
 
-os.makedirs(PASTA_LOGS, exist_ok=True)
-logging.basicConfig(
-    filename=ARQUIVO_LOG,
-    filemode='a',
-    level=logging.DEBUG,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(funcName)s - %(message)s'
-)
-logger = logging.getLogger()
+def configurar_logging():
+    """Configura o sistema de logging com arquivo diário"""
+    os.makedirs(PASTA_LOGS, exist_ok=True)
+    filemode = 'a' if Path(ARQUIVO_LOG).exists() else 'w'
+    
+    logging.basicConfig(
+        filename=ARQUIVO_LOG,
+        filemode=filemode,
+        level=logging.DEBUG,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(funcName)s - %(message)s'
+    )
+    return logging.getLogger()
+
+logger = configurar_logging()
+
 
 SERVICOS_PREDEFINIDOS = {
     'corte_masculino': 35,
@@ -40,9 +46,8 @@ SERVICOS_PREDEFINIDOS = {
     'camuflagem_barba': 10
 }
 
-
 def selecionar_arquivo() -> str:
-    """Gerencia a seleção/criação do arquivo CSV na pasta especificada"""
+    """Gerencia a seleção/criação do arquivo CSV com opção numérica"""
     global ARQUIVO_SELECIONADO
     os.makedirs(PASTA_PLANILHAS, exist_ok=True)
     
@@ -52,18 +57,23 @@ def selecionar_arquivo() -> str:
     
     if arquivos_existentes:
         print("\nArquivos disponíveis na pasta 'planilhas_de_servico':")
-        for i, arquivo in enumerate(arquivos_existentes[:5], 1):
+        for i, arquivo in enumerate(arquivos_existentes, 1):
             print(f"{i} - {arquivo}")
         
-        resposta = input("\nDeseja usar o último arquivo criado "
-                        f"({arquivos_existentes[0]}) ou criar um novo? "
-                        "(antigo/novo): ").strip().lower()
+        resposta = input("\nDeseja usar algum arquivo existente ou criar novo? "
+                        "(digite o número do arquivo ou 'novo'): ").strip().lower()
         
-        if resposta == 'antigo':
-            ARQUIVO_SELECIONADO = os.path.join(PASTA_PLANILHAS, arquivos_existentes[0])
-            return ARQUIVO_SELECIONADO
+        if resposta.isdigit():
+            num = int(resposta)
+            if 1 <= num <= len(arquivos_existentes):
+                ARQUIVO_SELECIONADO = os.path.join(PASTA_PLANILHAS, arquivos_existentes[num-1])
+                logger.info(f"Arquivo selecionado: {ARQUIVO_SELECIONADO}")
+                return ARQUIVO_SELECIONADO
+            else:
+                print("❌ Número inválido. Criando novo arquivo.")
     
     ARQUIVO_SELECIONADO = CAMINHO_COMPLETO
+    logger.info(f"Novo arquivo criado: {ARQUIVO_SELECIONADO}")
     return ARQUIVO_SELECIONADO
 
 
@@ -82,7 +92,6 @@ def salvar_servicos(df: pd.DataFrame):
     except Exception as e:
         logger.error(f"Falha ao salvar servicos: {e}")
         raise
-
 
 def inicializar_base_dados() -> pd.DataFrame:
     """Inicializa o DataFrame, verificando arquivo existente ou criando novo"""
@@ -272,6 +281,11 @@ def main():
     df = inicializar_base_dados()
 
     print("\n=== ✂️  GERENCIADOR DE BARBEARIA ✂️  ===")
+    if Path(ARQUIVO_SELECIONADO).exists():
+        print(f"📋 Arquivo existente '{os.path.basename(ARQUIVO_SELECIONADO)}' aberto")
+    else:
+        print(f"🆕 Novo arquivo '{os.path.basename(ARQUIVO_SELECIONADO)}' criado")
+    
     mostrar_ajuda()
 
     loop_count = 0
