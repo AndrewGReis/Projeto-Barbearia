@@ -4,12 +4,18 @@ from pathlib import Path
 import os
 from datetime import datetime
 
+# ====================================================
+# CONFIGURAÇÕES GLOBAIS
+# ====================================================
 PASTA_PLANILHAS = "planilhas_de_servico"
 PASTA_LOGS = "logs"
 DATA_ATUAL = datetime.now().strftime("%d%m%Y")
 NOME_ARQUIVO_PADRAO = f"balanco_diario{DATA_ATUAL}.csv"
 CAMINHO_COMPLETO = os.path.join(PASTA_PLANILHAS, NOME_ARQUIVO_PADRAO)
 ARQUIVO_LOG = os.path.join(PASTA_LOGS, "servicos_barbearia.log")
+
+# NOVO: Variável global para armazenar o arquivo selecionado
+ARQUIVO_SELECIONADO = None  # Será definido em selecionar_arquivo()
 
 os.makedirs(PASTA_LOGS, exist_ok=True)
 logging.basicConfig(
@@ -37,8 +43,14 @@ SERVICOS_PREDEFINIDOS = {
     'camuflagem_barba': 10
 }
 
+# ====================================================
+# FUNÇÕES PRINCIPAIS (MODIFICADAS)
+# ====================================================
+
+# MODIFICADO: Agora atualiza ARQUIVO_SELECIONADO globalmente
 def selecionar_arquivo() -> str:
     """Gerencia a seleção/criação do arquivo CSV na pasta especificada"""
+    global ARQUIVO_SELECIONADO  # NOVO: Acessa a variável global
     os.makedirs(PASTA_PLANILHAS, exist_ok=True)
     
     arquivos_existentes = [f for f in os.listdir(PASTA_PLANILHAS) 
@@ -55,10 +67,35 @@ def selecionar_arquivo() -> str:
                         "(antigo/novo): ").strip().lower()
         
         if resposta == 'antigo':
-            return os.path.join(PASTA_PLANILHAS, arquivos_existentes[0])
+            ARQUIVO_SELECIONADO = os.path.join(PASTA_PLANILHAS, arquivos_existentes[0])  # NOVO: Atualiza global
+            return ARQUIVO_SELECIONADO
     
-    return CAMINHO_COMPLETO
+    ARQUIVO_SELECIONADO = CAMINHO_COMPLETO  # NOVO: Atualiza global
+    return ARQUIVO_SELECIONADO
 
+# MODIFICADO: Remove a redundância com inicializar_base_dados()
+# (Função carregar_servicos() foi removida pois não é mais necessária)
+
+# MODIFICADO: Agora usa ARQUIVO_SELECIONADO em vez de CAMINHO_COMPLETO
+def salvar_servicos(df: pd.DataFrame):
+    try:
+        global ARQUIVO_SELECIONADO  # NOVO: Usa o arquivo selecionado
+        logger.info(f"✅ Salvando servicos no arquivo {ARQUIVO_SELECIONADO}")
+        df.to_csv(
+            ARQUIVO_SELECIONADO,  # MODIFICADO: Salva no arquivo selecionado
+            mode='w',
+            index=False,
+            columns=['Cliente', 'Servico', 'Preco', 'Quantidade'],
+            header=['Cliente', 'Serviço', 'Preço (R$)', 'Quantidade'],
+            encoding='utf-8-sig'
+        )
+    except Exception as e:
+        logger.error(f"Falha ao salvar servicos: {e}")
+        raise
+
+# ====================================================
+# FUNÇÕES SECUNDÁRIAS (INALTERADAS)
+# ====================================================
 def inicializar_base_dados() -> pd.DataFrame:
     """Inicializa o DataFrame, verificando arquivo existente ou criando novo"""
     database_path = selecionar_arquivo()
@@ -92,51 +129,6 @@ def inicializar_base_dados() -> pd.DataFrame:
     else:
         logger.info(f"Arquivo {database_path} nao encontrado. Novo sera criado.")
         print(f"\n🆕 Criando novo arquivo: {os.path.basename(database_path)}")
-        return pd.DataFrame(columns=['Cliente', 'Servico', 'Preco', 'Quantidade'])
-
-def salvar_servicos(df: pd.DataFrame):
-    try:
-        logger.info(f"✅ Salvando servicos no arquivo {CAMINHO_COMPLETO}")
-        df.to_csv(
-            CAMINHO_COMPLETO,
-            mode='w',
-            index=False,
-            columns=['Cliente', 'Servico', 'Preco', 'Quantidade'],
-            header=['Cliente', 'Serviço', 'Preço (R$)', 'Quantidade'],
-            encoding='utf-8-sig'
-        )
-    except Exception as e:
-        logger.error(f"Falha ao salvar servicos: {e}")
-        raise
-
-def carregar_servicos() -> pd.DataFrame:
-    try:
-        if Path(CAMINHO_COMPLETO).exists():
-            logger.info(f"Carregando servicos do arquivo {CAMINHO_COMPLETO}")
-            df = pd.read_csv(CAMINHO_COMPLETO, encoding='utf-8-sig')
-            df.columns = df.columns.str.strip().str.lower()
-            
-            if 'cliente' in df.columns:
-                df = df.rename(columns={
-                    'cliente': 'Cliente',
-                    'serviço': 'Servico',
-                    'preço (r$)': 'Preco',
-                    'quantidade': 'Quantidade'
-                })
-                return df[['Cliente', 'Servico', 'Preco', 'Quantidade']]
-            else:
-                df = df.rename(columns={
-                    'serviço': 'Servico',
-                    'preço (r$)': 'Preco',
-                    'quantidade': 'Quantidade'
-                })
-                df['Cliente'] = 'Geral'
-                return df[['Cliente', 'Servico', 'Preco', 'Quantidade']]
-        else:
-            logger.info("Criando novo DataFrame de servicos (nenhum arquivo encontrado).")
-            return pd.DataFrame(columns=['Cliente', 'Servico', 'Preco', 'Quantidade'])
-    except Exception as e:
-        logger.error(f"Erro ao carregar servicos: {e}")
         return pd.DataFrame(columns=['Cliente', 'Servico', 'Preco', 'Quantidade'])
 
 def adicionar_cliente_servico(cliente: str, servico: str, df: pd.DataFrame) -> pd.DataFrame:
