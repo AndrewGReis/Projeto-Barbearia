@@ -15,9 +15,9 @@ Sistema em desenvolvimento para gestão de serviços em barbearia com controle i
 
 ## ⚙️ Funcionalidades 💻
 
--## 👤  Cadastro por cliente com nome e sobrenome
--## 🏆  Destaques automáticos do dia
--## 📈  Relatórios financeiros aprimorados
+-# 👤  Cadastro por cliente com nome e sobrenome
+-# 🏆  Destaques automáticos do dia
+-# 📈  Relatórios financeiros aprimorados
 
 ### 📋 Funcionalidades Principais
 
@@ -85,16 +85,16 @@ sair                         # Encerra o programa
 ### 📋📋 Serviços por cliente:
 
 ## Cliente: Carlos Oliveira  
-- selagem: 1x (R$80.00)  
-- barboterapia: 1x (R$35.00)
- Total: R$115.00  
+-# selagem: 1x (R$80.00)  
+-# barboterapia: 1x (R$35.00)
+-# Total: R$115.00  
 
 Cliente: Anderson Silva  
-- reflexo: 1x (R$50.00)  
-- depilacao_nariz_orelha: 1x (R$20.00)  
-- platinado: 1x (R$100.00)  
-- selagem: 1x (R$80.00)  
-Total: R$250.00  
+-# reflexo: 1x (R$50.00)  
+-# depilacao_nariz_orelha: 1x (R$20.00)  
+-# platinado: 1x (R$100.00)  
+-# selagem: 1x (R$80.00)  
+-# Total: R$250.00  
 
 ═══════════════════════════════
 
@@ -103,23 +103,23 @@ Total: R$250.00
 ## ⚙️ Detalhes de Implementação
 
 ### 📂 Sistema de Arquivos
-- Verificação automática do arquivo `balanco_diario[DATA].csv` ao iniciar
-- Opção de continuar com arquivo existente ou criar novo
-- Logs diários em `servicos_barbearia.log` com timestamp
+-# Verificação automática do arquivo `balanco_diario[DATA].csv` ao iniciar
+-# Opção de continuar com arquivo existente ou criar novo
+-# Logs diários em `servicos_barbearia.log` com timestamp
 
 ### 🛠️  Funcionalidades Implementadas
-  - Cadastro por Cliente Completo:
-  - Registro com nomes entre aspas (ex: `"João Silva"`)
-  - Histórico individual de serviços por cliente
-  - Compatibilidade com versões anteriores (clientes sem nome ficam como "Geral")
+  -# Cadastro por Cliente Completo:
+  -# Registro com nomes entre aspas (ex: `"João Silva"`)
+  -# Histórico individual de serviços por cliente
+  -# Compatibilidade com versões anteriores (clientes sem nome ficam como "Geral")
 
   # Nova estrutura do DataFrame:
   Colunas: [Cliente, Serviço, Preço, Quantidade, Total]
 
 ### 👥 Agrupamento Inteligente
-- Agrupa serviços por cliente automaticamente
-- Calcula totais individuais e comparativos
-- Ordena por volume de serviços ou valor gasto
+-# Agrupa serviços por cliente automaticamente
+-# Calcula totais individuais e comparativos
+-# Ordena por volume de serviços ou valor gasto
 
 ### 🔒 Segurança e Controle
 ## Funcionalidade  Descrição 
@@ -131,7 +131,7 @@ Total: R$250.00
 ### 💾 Persistência de Dados
 ```python
 # Estrutura de armazenamento:
-- Formato: CSV com UTF-8-sig (Excel compatível)
-- Nomenclatura: balanco_diario[DDMMAAAA].csv
-- Local: /planilhas_de_servico/
-- Logs: /logs/servicos_barbearia.log
+-# Formato: CSV com UTF-8-sig (Excel compatível)
+-# Nomenclatura: balanco_diario[DDMMAAAA].csv
+-# Local: /planilhas_de_servico/
+-# Logs: /logs/servicos_barbearia.log
