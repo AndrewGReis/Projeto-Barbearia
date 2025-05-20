@@ -121,7 +121,7 @@ Cliente: Anderson Silva
 -# Calcula totais individuais e comparativos
 -# Ordena por volume de serviços ou valor gasto
 
-### 🔒 Segurança e Controle
+## 🔒 Segurança e Controle
 ## Funcionalidade  Descrição 
 
 ##  ⏳ Limite de Operações  6 comandos por execução 
