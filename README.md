@@ -9,7 +9,7 @@ Sistema em desenvolvimento para gestão de serviços em barbearia com controle i
 ```bash
 📁 Projeto-Barbearia/
 ├── 📄 barbearia.py          # Código principal
-├── 📁 planilhas_de_servico/  # Armazena os CSVs diários
+├── 📁 planilhas_de_servico/ # Armazena os CSVs diários
 ├── 📁 logs/                 # Registros de operações
 └── 📄 README.md             # Documentação do projeto
 
