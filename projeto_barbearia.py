@@ -4,9 +4,7 @@ from pathlib import Path
 import os
 from datetime import datetime
 
-# ====================================================
-# CONFIGURAÇÕES GLOBAIS
-# ====================================================
+
 PASTA_PLANILHAS = "planilhas_de_servico"
 PASTA_LOGS = "logs"
 DATA_ATUAL = datetime.now().strftime("%d%m%Y")
@@ -14,8 +12,7 @@ NOME_ARQUIVO_PADRAO = f"balanco_diario{DATA_ATUAL}.csv"
 CAMINHO_COMPLETO = os.path.join(PASTA_PLANILHAS, NOME_ARQUIVO_PADRAO)
 ARQUIVO_LOG = os.path.join(PASTA_LOGS, "servicos_barbearia.log")
 
-# NOVO: Variável global para armazenar o arquivo selecionado
-ARQUIVO_SELECIONADO = None  # Será definido em selecionar_arquivo()
+ARQUIVO_SELECIONADO = None
 
 os.makedirs(PASTA_LOGS, exist_ok=True)
 logging.basicConfig(
@@ -43,14 +40,10 @@ SERVICOS_PREDEFINIDOS = {
     'camuflagem_barba': 10
 }
 
-# ====================================================
-# FUNÇÕES PRINCIPAIS (MODIFICADAS)
-# ====================================================
 
-# MODIFICADO: Agora atualiza ARQUIVO_SELECIONADO globalmente
 def selecionar_arquivo() -> str:
     """Gerencia a seleção/criação do arquivo CSV na pasta especificada"""
-    global ARQUIVO_SELECIONADO  # NOVO: Acessa a variável global
+    global ARQUIVO_SELECIONADO
     os.makedirs(PASTA_PLANILHAS, exist_ok=True)
     
     arquivos_existentes = [f for f in os.listdir(PASTA_PLANILHAS) 
@@ -67,22 +60,19 @@ def selecionar_arquivo() -> str:
                         "(antigo/novo): ").strip().lower()
         
         if resposta == 'antigo':
-            ARQUIVO_SELECIONADO = os.path.join(PASTA_PLANILHAS, arquivos_existentes[0])  # NOVO: Atualiza global
+            ARQUIVO_SELECIONADO = os.path.join(PASTA_PLANILHAS, arquivos_existentes[0])
             return ARQUIVO_SELECIONADO
     
-    ARQUIVO_SELECIONADO = CAMINHO_COMPLETO  # NOVO: Atualiza global
+    ARQUIVO_SELECIONADO = CAMINHO_COMPLETO
     return ARQUIVO_SELECIONADO
 
-# MODIFICADO: Remove a redundância com inicializar_base_dados()
-# (Função carregar_servicos() foi removida pois não é mais necessária)
 
-# MODIFICADO: Agora usa ARQUIVO_SELECIONADO em vez de CAMINHO_COMPLETO
 def salvar_servicos(df: pd.DataFrame):
     try:
-        global ARQUIVO_SELECIONADO  # NOVO: Usa o arquivo selecionado
+        global ARQUIVO_SELECIONADO
         logger.info(f"✅ Salvando servicos no arquivo {ARQUIVO_SELECIONADO}")
         df.to_csv(
-            ARQUIVO_SELECIONADO,  # MODIFICADO: Salva no arquivo selecionado
+            ARQUIVO_SELECIONADO,
             mode='w',
             index=False,
             columns=['Cliente', 'Servico', 'Preco', 'Quantidade'],
@@ -93,9 +83,7 @@ def salvar_servicos(df: pd.DataFrame):
         logger.error(f"Falha ao salvar servicos: {e}")
         raise
 
-# ====================================================
-# FUNÇÕES SECUNDÁRIAS (INALTERADAS)
-# ====================================================
+
 def inicializar_base_dados() -> pd.DataFrame:
     """Inicializa o DataFrame, verificando arquivo existente ou criando novo"""
     database_path = selecionar_arquivo()
