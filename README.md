@@ -128,7 +128,7 @@ Cliente: Anderson Silva
 ##  💾 Backup Automático  Salva dados antes de operações críticas 
 ##  🛡️ Tratamento de Erros  Valida nomes e serviços em tempo real 
 
-# 💾 Persistência de Dados
+### 💾 Persistência de Dados
 ```python
 # Estrutura de armazenamento:
 -# Formato: CSV com UTF-8-sig (Excel compatível)
