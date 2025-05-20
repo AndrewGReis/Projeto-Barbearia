@@ -4,7 +4,7 @@ Sistema em desenvolvimento para gestão de serviços em barbearia com controle i
 
 ![Progresso](https://geps.dev/progress/80?style=for-the-badge&color=2ecc71)
 
-# 📂 Estrutura do Projeto
+ 📂 Estrutura do Projeto
 
 ```bash
 📁 Projeto-Barbearia/
@@ -13,30 +13,30 @@ Sistema em desenvolvimento para gestão de serviços em barbearia com controle i
 ├── 📁 logs/                 # Registros de operações
 └── 📄 README.md             # Documentação do projeto
 
-# ⚙️ Funcionalidades 💻
+ ⚙️ Funcionalidades 💻
 
--# 👤  Cadastro por cliente com nome e sobrenome
--# 🏆  Destaques automáticos do dia
--# 📈  Relatórios financeiros aprimorados
+- 👤  Cadastro por cliente com nome e sobrenome
+- 🏆  Destaques automáticos do dia
+- 📈  Relatórios financeiros aprimorados
 
-# 📋 Funcionalidades Principais
+ 📋 Funcionalidades Principais
 
-#  📝  Registro de serviços com preços pré-definidos 
-#  🔄  Incremento automático de quantidade para serviços repetidos 
-#  🗑️  Opção de Remoção do último serviço adicionado 
-#  📊  Relatórios detalhados em formato de tabela 
-#  💾  Armazenamento em CSV com compatibilidade Excel 
-#  📌  Sistema completo de logs de operações 
+  📝  Registro de serviços com preços pré-definidos 
+  🔄  Incremento automático de quantidade para serviços repetidos 
+  🗑️  Opção de Remoção do último serviço adicionado 
+  📊  Relatórios detalhados em formato de tabela 
+  💾  Armazenamento em CSV com compatibilidade Excel 
+  📌  Sistema completo de logs de operações 
 
-# 🛠️ Tecnologias Utilizadas
+ 🛠️ Tecnologias Utilizadas
 
-- # Python
+-  Python
 - Bibliotecas:
   - `pandas` para manipulação de dados
   - `logging` para registro de logs
   - `pathlib` e `os` para manipulação de arquivos
 
-# 🚀 Como Usar
+ 🚀 Como Usar
 
 add "Nome Completo" serviço  # Registra um serviço
 remover                      # Remove o último serviço
@@ -46,7 +46,7 @@ help                         # Exibe ajuda
 sair                         # Encerra o programa
 
 
-# 📋  Serviços Pré-definidos e Preços  🧾
+ 📋  Serviços Pré-definidos e Preços  🧾
 
 | Serviço                   | Preço (R$) |
 | ------------------------- | ---------- |
@@ -67,71 +67,71 @@ sair                         # Encerra o programa
 ---
 
 
-# 🏆 Destaques Automáticos
+ 🏆 Destaques Automáticos
 ═══════════════════════════════
       ✂️ RESUMO DIÁRIO ✂️      
 ═══════════════════════════════
-#  Exemplo da Funcionalidade 
-#  📋📋 Total de serviços: 9  
-#  🧾🧾 Valor arrecadado: R$525.00
+  Exemplo da Funcionalidade 
+  📋📋 Total de serviços: 9  
+  🧾🧾 Valor arrecadado: R$525.00
 
-# 🏆 DESTAQUES:  
-# 👑 Cliente Top: André Silva (8 serviços)  
-# 💰 Maior Gasto: Anderson Silva (R$250.00) 
+ 🏆 DESTAQUES:  
+ 👑 Cliente Top: André Silva (8 serviços)  
+ 💰 Maior Gasto: Anderson Silva (R$250.00) 
 
-# 🔍 Detalhamento por Cliente:
-# Exemplo:
+ 🔍 Detalhamento por Cliente:
+ Exemplo:
 
-# 📋📋 Serviços por cliente:
+ 📋📋 Serviços por cliente:
 
 Cliente: Carlos Oliveira  
--# selagem: 1x (R$80.00)  
--# barboterapia: 1x (R$35.00)
--# Total: R$115.00  
+- selagem: 1x (R$80.00)  
+- barboterapia: 1x (R$35.00)
+- Total: R$115.00  
 
 Cliente: Anderson Silva  
--# reflexo: 1x (R$50.00)  
--# depilacao_nariz_orelha: 1x (R$20.00)  
--# platinado: 1x (R$100.00)  
--# selagem: 1x (R$80.00)  
--# Total: R$250.00  
+- reflexo: 1x (R$50.00)  
+- depilacao_nariz_orelha: 1x (R$20.00)  
+- platinado: 1x (R$100.00)  
+- selagem: 1x (R$80.00)  
+- Total: R$250.00  
 
 ═══════════════════════════════
 
 ═══════════════════════════════
 
-# ⚙️ Detalhes de Implementação
+ ⚙️ Detalhes de Implementação
 
-# 📂 Sistema de Arquivos
--# Verificação automática do arquivo `balanco_diario[DATA].csv` ao iniciar
--# Opção de continuar com arquivo existente ou criar novo
--# Logs diários em `servicos_barbearia.log` com timestamp
+ 📂 Sistema de Arquivos
+- Verificação automática do arquivo `balanco_diario[DATA].csv` ao iniciar
+- Opção de continuar com arquivo existente ou criar novo
+- Logs diários em `servicos_barbearia.log` com timestamp
 
-# 🛠️  Funcionalidades Implementadas
-  -# Cadastro por Cliente Completo:
-  -# Registro com nomes entre aspas (ex: `"João Silva"`)
-  -# Histórico individual de serviços por cliente
-  -# Compatibilidade com versões anteriores (clientes sem nome ficam como "Geral")
+ 🛠️  Funcionalidades Implementadas
+  - Cadastro por Cliente Completo:
+  - Registro com nomes entre aspas (ex: `"João Silva"`)
+  - Histórico individual de serviços por cliente
+  - Compatibilidade com versões anteriores (clientes sem nome ficam como "Geral")
 
-  # Nova estrutura do DataFrame:
+   Nova estrutura do DataFrame:
   Colunas: [Cliente, Serviço, Preço, Quantidade, Total]
 
-# 👥 Agrupamento Inteligente
--# Agrupa serviços por cliente automaticamente
--# Calcula totais individuais e comparativos
--# Ordena por volume de serviços ou valor gasto
+ 👥 Agrupamento Inteligente
+- Agrupa serviços por cliente automaticamente
+- Calcula totais individuais e comparativos
+- Ordena por volume de serviços ou valor gasto
 
-# 🔒 Segurança e Controle
-# Funcionalidade  Descrição 
+ 🔒 Segurança e Controle
+ Funcionalidade  Descrição 
 
-#  ⏳ Limite de Operações  6 comandos por execução 
-#  💾 Backup Automático  Salva dados antes de operações críticas 
-#  🛡️ Tratamento de Erros  Valida nomes e serviços em tempo real 
+  ⏳ Limite de Operações  6 comandos por execução 
+  💾 Backup Automático  Salva dados antes de operações críticas 
+  🛡️ Tratamento de Erros  Valida nomes e serviços em tempo real 
 
-# 💾 Persistência de Dados
+ 💾 Persistência de Dados
 ```python
-# Estrutura de armazenamento:
--# Formato: CSV com UTF-8-sig (Excel compatível)
--# Nomenclatura: balanco_diario[DDMMAAAA].csv
--# Local: /planilhas_de_servico/
--# Logs: /logs/servicos_barbearia.log
+ Estrutura de armazenamento:
+- Formato: CSV com UTF-8-sig (Excel compatível)
+- Nomenclatura: balanco_diario[DDMMAAAA].csv
+- Local: /planilhas_de_servico/
+- Logs: /logs/servicos_barbearia.log
