@@ -36,6 +36,14 @@ Sistema em desenvolvimento para gestão de serviços em barbearia com controle i
   - `logging` para registro de logs
   - `pathlib` e `os` para manipulação de arquivos
 
+ 💾 Estrutura de armazenamento:
+
+- Formato: CSV com UTF-8-sig (Excel compatível)
+- Nomenclatura: balanco_diario[DDMMAAAA].csv
+- Local: /planilhas_de_servico/
+- Logs: /logs/servicos_barbearia.log
+
+
  🚀 Como Usar
 
 add "Nome Completo" serviço  # Registra um serviço
@@ -129,8 +137,9 @@ Cliente: Anderson Silva
   🛡️ Tratamento de Erros  Valida nomes e serviços em tempo real 
 
  💾 Persistência de Dados
-```python
- Estrutura de armazenamento:
+
+  Estrutura de armazenamento:
+  
 - Formato: CSV com UTF-8-sig (Excel compatível)
 - Nomenclatura: balanco_diario[DDMMAAAA].csv
 - Local: /planilhas_de_servico/
