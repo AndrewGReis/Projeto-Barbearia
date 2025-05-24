@@ -4,7 +4,6 @@ Sistema em desenvolvimento para gestão de serviços em barbearia com controle i
 
 ![Progresso](https://geps.dev/progress/80?style=for-the-badge&color=2ecc71)
 
-
  📂 Estrutura do Projeto
 
 ```bash
@@ -147,9 +146,11 @@ Cliente: Anderson Silva
 - Local: /planilhas_de_servico/
 - Logs: /logs/servicos_barbearia.log
 
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Ampliação Recomendada <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 📊 Ampliando o Projeto: Opções de Armazenamento 💾
 
-![Progresso](https://img.shields.io/badge/Progresso-20%25-2ecc71?style=for-the-badge)
+![Progresso](https://geps.dev/progress/20?style=for-the-badge&color=2ecc71)
 
 **Sistema atualmente compatível com adição de banco de dados**
 
@@ -176,8 +177,7 @@ Gera logs e CSVs (que podem ser substituídos por queries SQL ou chamadas à API
 🚀 Escalável: Suporta desde pequenas barbearias até redes grandes
 📱 Mobile-friendly: Visualização perfeita em celulares
 
-✅ Benefícios Chave
-# Exemplo de pseudo código em python mostrando a simplicidade de integração
+💻 Exemplo de pseudo código em python mostrando a simplicidade de integração
 import gspread
 creds = Credentials.from_service_account_file("credenciais.json")
 client = gspread.authorize(creds)  # Conexão feita em 2 linhas!
@@ -234,5 +234,3 @@ client = gspread.authorize(creds)
 -📈 Gráficos de faturamento 💰
 -📊 Tabelas de serviços mais vendidos 🏆
 -📈 Análise de clientes frequentes 🤝
-
-
