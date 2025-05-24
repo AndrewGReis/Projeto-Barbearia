@@ -16,7 +16,7 @@ Sistema em desenvolvimento para gestão de serviços em barbearia com controle i
  ⚙️ Funcionalidades 💻
 
 - 👤  Cadastro por cliente com nome e sobrenome
-- 🏆  Destaques automáticos do dia
+- 🏆  Destaques automáticos para o dia
 - 📈  Relatórios financeiros aprimorados
 
  📋 Funcionalidades Principais
