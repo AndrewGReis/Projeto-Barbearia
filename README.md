@@ -147,9 +147,11 @@ Cliente: Anderson Silva
 - Local: /planilhas_de_servico/
 - Logs: /logs/servicos_barbearia.log
 
-💾 Ampliando o Projeto: Opções de Armazenamento
+📊 Ampliando o Projeto: Opções de Armazenamento 💾
 
-![Progresso](https://img.shields.io/badge/Progresso-20%25-2ecc71?style=for-the-badge)
+![Progresso](https://geps.dev/progress/80?style=for-the-badge&color=2ecc71)
+
+**Sistema atualmente compatível com adição de banco de dados**
 
 📊 Sistema atualmente compatível a Adição de banco de dados
 
@@ -161,11 +163,13 @@ Gera logs e CSVs (que podem ser substituídos por queries SQL ou chamadas à API
 🔍 Por Que a Escolha Estas Ferramentas?
 
 🆓 Google Sheets + Looker Studio = Solução Gratuita e Poderosa
-
-| Ferramenta       | 💡 Vantagens                                                                 | 📊 Limites Gratuitos                          |
-|------------------|-----------------------------------------------------------------------------|-----------------------------------------------|
-| **Google Sheets**  | • Integração perfeita com Python<br>• Fácil compartilhamento<br>• Histórico de alterações | • 10 milhões de células<br>• 300 reqs/minuto API |
-| **Looker Studio** | • Dashboards profissionais<br>• Atualização em tempo real<br>• Visualização mobile      | • Grátis para fontes básicas<br>• Sem limite de relatórios |
+|----------------------------------|---------------------------------------------------|
+| **Google Sheets**                |                 | **Looker Studio**               |
+• Integração perfeita com Python   |                | • Dashboards profissionais       |
+• Fácil compartilhamento           |                |  • Atualização em tempo real     |
+• Histórico de alterações          |                | • Visualização mobile            |
+• 10 milhões de células            |                |  • Grátis para fontes básicas    |
+• 300 reqs/minuto API              |                | • Sem limite de relatórios       |
 
 🌐 Acessível em qualquer lugar: Dados disponíveis na nuvem 24/7
 🤝 Colaboração: Multiplos usuários podem ver/editarem tempo real
