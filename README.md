@@ -147,11 +147,9 @@ Cliente: Anderson Silva
 - Local: /planilhas_de_servico/
 - Logs: /logs/servicos_barbearia.log
 
-<p align="center">
-  <img src="https://i.imgur.com/5KqXYQp.png" alt="Progresso 20%" width="400">
-</p>
-
 💻 Modificações Recomendadas para Adição de Banco de Dados Local com Integração na Nuvem
+
+![Progresso](https://geps.dev/progress/20?style=for-the-badge&color=2ecc71)
 
 📊 Sistema atualmente compatível Adição de banco de dados
 
