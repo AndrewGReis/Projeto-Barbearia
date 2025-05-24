@@ -23,7 +23,7 @@ Sistema em desenvolvimento para gestão de serviços em barbearia com controle i
 
   📝  Registro de serviços com preços pré-definidos 
   🔄  Incremento automático de quantidade para serviços repetidos 
-  🗑️  Opção de Remoção do último serviço adicionado 
+  🗑️  Opção de Remoção de último serviço adicionado 
   📊  Relatórios detalhados em formato de tabela 
   💾  Armazenamento em CSV com compatibilidade Excel 
   📌  Sistema completo de logs de operações 
@@ -122,7 +122,7 @@ Cliente: Anderson Silva
   - Histórico individual de serviços por cliente
   - Compatibilidade com versões anteriores (clientes sem nome ficam como "Geral")
 
-   Nova estrutura do DataFrame:
+   Estrutura DataFrame:
   Colunas: [Cliente, Serviço, Preço, Quantidade, Total]
 
  👥 Agrupamento Inteligente
