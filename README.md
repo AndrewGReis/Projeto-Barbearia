@@ -146,7 +146,7 @@ Cliente: Anderson Silva
 - Local: /planilhas_de_servico/
 - Logs: /logs/servicos_barbearia.log
 
-![Progresso](https://img.shields.io/badge/Progresso-20%80-2ecc71?style=for-the-badge&logo=progress&logoColor=white)
+![Progresso](https://geps.dev/progress/20?style=for-the-badge&color=2ecc71
 
 💻 Modificações Recomendadas para Adição de Banco de Dados Local com Integração na Nuvem
 
