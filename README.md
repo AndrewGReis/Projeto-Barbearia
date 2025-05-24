@@ -206,7 +206,6 @@ client = gspread.authorize(creds)
 
 📁 Nova Estrutura do Projeto
 
-```bash
 📁 Projeto-Barbearia/
 ├── 📄 barbearia.py          # Código principal
 ├── 📁 dados/                # Arquivos CSV locais
