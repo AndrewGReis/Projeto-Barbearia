@@ -149,9 +149,7 @@ Cliente: Anderson Silva
 
 💾 Ampliando o Projeto: Opções de Armazenamento
 
-<p align="center">
-  <img src="https://i.ibb.co/4T2L0y6/progress-bar-20.png" alt="Progresso 20%" width="400">
-</p>
+![Progresso](https://img.shields.io/badge/Progresso-20%25-2ecc71?style=for-the-badge)
 
 📊 Sistema atualmente compatível a Adição de banco de dados
 
