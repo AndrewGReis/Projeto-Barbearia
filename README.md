@@ -150,7 +150,7 @@ Cliente: Anderson Silva
 💾 Ampliando o Projeto: Opções de Armazenamento
 
 
-![Progresso](https://geps.dev/progress/20?style=for-the-badge&color=2ecc71)
+![Progresso 20%](https://i.ibb.co/4T2L0y6/progress-bar-20.png)
 
 
 
