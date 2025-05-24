@@ -153,7 +153,6 @@ Cliente: Anderson Silva
 ![Progresso](https://us-central1-progress-markdown.cloudfunctions.net/progress/20?style=for-the-badge&color=2ecc71)
 
 
-
 📊 Sistema atualmente compatível a Adição de banco de dados
 
 O código atual já tem uma estrutura perfeita para migrar para um banco de dados na nuvem!
