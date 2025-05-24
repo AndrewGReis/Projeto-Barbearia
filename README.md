@@ -112,7 +112,7 @@ Cliente: Anderson Silva
  ⚙️ Detalhes de Implementação
 
  📂 Sistema de Arquivos
-- Verificação automática do arquivo `balanco_diario[DATA].csv` ao iniciar
+- Verificação automática: arquivo `balanco_diario[DATA].csv` ao iniciar
 - Opção de continuar com arquivo existente ou criar novo
 - Logs diários em `servicos_barbearia.log` com timestamp
 
