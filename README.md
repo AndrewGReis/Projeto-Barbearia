@@ -1,9 +1,9 @@
 # ✂️ Gerenciador de Serviços de Barbearia ✂️
 
 Sistema em desenvolvimento para gestão de serviços em barbearia com controle individual por cliente, relatórios financeiros detalhados e armazenamento seguro de dados.
-<p align="center">
-  ![Progresso](https://geps.dev/progress/80?style=for-the-badge&color=2ecc71)
-</p>
+
+![Progresso](https://geps.dev/progress/80?style=for-the-badge&color=2ecc71)
+
 
  📂 Estrutura do Projeto
 
@@ -148,7 +148,7 @@ Cliente: Anderson Silva
 - Logs: /logs/servicos_barbearia.log
 
 <p align="center">
-  <img src="https://via.placeholder.com/400x50/2ecc71/ffffff?text=20%80" alt="Progresso 20%">
+  <img src="https://i.imgur.com/5KqXYQp.png" alt="Progresso 20%" width="400">
 </p>
 
 💻 Modificações Recomendadas para Adição de Banco de Dados Local com Integração na Nuvem
