@@ -149,7 +149,9 @@ Cliente: Anderson Silva
 
 💻 Modificações Recomendadas para Adição de Banco de Dados Local com Integração na Nuvem
 
-![Progresso](https://geps.dev/progress/20?style=for-the-badge&color=2ecc71)
+<p align="center">
+  <img src="https://progress-bar.dev/20/?width=400&color=2ecc71" alt="Progresso 20%">
+</p>
 
 📊 Sistema atualmente compatível Adição de banco de dados
 
