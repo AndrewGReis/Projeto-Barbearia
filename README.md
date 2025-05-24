@@ -150,7 +150,7 @@ Cliente: Anderson Silva
 💾 Ampliando o Projeto: Opções de Armazenamento
 
 
-![Progresso 20%](https://i.ibb.co/4T2L0y6/progress-bar-20.png)
+![Progresso](https://us-central1-progress-markdown.cloudfunctions.net/progress/20?style=for-the-badge&color=2ecc71)
 
 
 
@@ -176,8 +176,7 @@ Gera logs e CSVs (que podem ser substituídos por queries SQL ou chamadas à API
 📱 Mobile-friendly: Visualização perfeita em celulares
 
 ✅ Benefícios Chave
-```python
-# Exemplo de código mostrando a simplicidade de integração
+# Exemplo de pseudo código em python mostrando a simplicidade de integração
 import gspread
 creds = Credentials.from_service_account_file("credenciais.json")
 client = gspread.authorize(creds)  # Conexão feita em 2 linhas!
