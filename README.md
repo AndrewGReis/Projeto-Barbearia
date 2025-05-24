@@ -150,8 +150,6 @@ Cliente: Anderson Silva
 
 📊 Ampliando o Projeto: Opções de Armazenamento 💾
 
-![Progresso](https://geps.dev/progress/20?style=for-the-badge&color=2ecc71)
-
 **Sistema atualmente compatível com adição de banco de dados**
 
 📊 Sistema atualmente compatível a Adição de banco de dados
@@ -165,7 +163,7 @@ Gera logs e CSVs (que podem ser substituídos por queries SQL ou chamadas à API
 
 🆓 Google Sheets + Looker Studio = Solução Gratuita e Poderosa
 |----------------------------------|---------------------------------------------------|
-| **Google Sheets**                |                 | **Looker Studio**               |
+| **Google Sheets**                |                | **Looker Studio**                |
 • Integração perfeita com Python   |                | • Dashboards profissionais       |
 • Fácil compartilhamento           |                |  • Atualização em tempo real     |
 • Histórico de alterações          |                | • Visualização mobile            |
@@ -200,10 +198,9 @@ google-auth
 2. Crie uma chave de serviço (JSON) 🔑
 3. Compartilhe sua planilha com o e-mail da conta de serviço
 
+💻 Exemplo de configurações necessárias
 import gspread
 from google.oauth2.service_account import Credentials
-
-💻 Configuração básica
 scope = ["https://www.googleapis.com/auth/spreadsheets"]
 creds = Credentials.from_service_account_file("credenciais.json", scopes=scope)
 client = gspread.authorize(creds)
