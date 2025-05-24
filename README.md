@@ -149,7 +149,7 @@ Cliente: Anderson Silva
 
 📊 Ampliando o Projeto: Opções de Armazenamento 💾
 
-![Progresso](https://geps.dev/progress/80?style=for-the-badge&color=2ecc71)
+![Progresso](https://progress-bar.dev/20/?width=400&color=2ecc71&title=)
 
 **Sistema atualmente compatível com adição de banco de dados**
 
