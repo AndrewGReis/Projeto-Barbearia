@@ -2,7 +2,7 @@
 
 Sistema em desenvolvimento para gestão de serviços em barbearia com controle individual por cliente, relatórios financeiros detalhados e armazenamento seguro de dados.
 
-🟩🟩🟩🟩🟩🟩🟩🟩⬜⬜ 80%
+![Progresso](https://geps.dev/progress/80?style=for-the-badge&color=2ecc71)
 
  📂 Estrutura do Projeto
 
