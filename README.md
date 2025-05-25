@@ -148,6 +148,8 @@ Cliente: Anderson Silva
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Ampliação Recomendada <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+![Progresso](https://geps.dev/progress/20?style=for-the-badge&color=2ecc71)
+
 📊 Ampliando o Projeto: Opções de Armazenamento 💾
 
 **Sistema atualmente compatível com adição de banco de dados**
@@ -165,9 +167,9 @@ Gera logs e CSVs (que podem ser substituídos por queries SQL ou chamadas à API
 |----------------------------------|---------------------------------------------------|
 | **Google Sheets**                |                | **Looker Studio**                |
 • Integração perfeita com Python   |                | • Dashboards profissionais       |
-• Fácil compartilhamento           |                |  • Atualização em tempo real     |
+• Fácil compartilhamento           |                | • Atualização em tempo real      |
 • Histórico de alterações          |                | • Visualização mobile            |
-• 10 milhões de células            |                |  • Grátis para fontes básicas    |
+• 10 milhões de células            |                | • Grátis para fontes básicas     |
 • 300 reqs/minuto API              |                | • Sem limite de relatórios       |
 
 🌐 Acessível em qualquer lugar: Dados disponíveis na nuvem 24/7
