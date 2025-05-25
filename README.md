@@ -200,13 +200,6 @@ google-auth
 2. Crie uma chave de serviço (JSON) 🔑
 3. Compartilhe sua planilha com o e-mail da conta de serviço
 
-💻 Exemplo de configurações necessárias
-import gspread
-from google.oauth2.service_account import Credentials
-scope = ["https://www.googleapis.com/auth/spreadsheets"]
-creds = Credentials.from_service_account_file("credenciais.json", scopes=scope)
-client = gspread.authorize(creds)
-
 📁 Nova Estrutura do Projeto
 
 📁 Projeto-Barbearia/
