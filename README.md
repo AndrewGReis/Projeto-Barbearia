@@ -2,7 +2,7 @@
 
 Sistema em desenvolvimento para gestão de serviços em barbearia com controle individual por cliente, relatórios financeiros detalhados e armazenamento seguro de dados.
 
-![Progresso](https://geps.dev/progress/80?style=for-the-badge&color=2ecc71)
+![80%](https://img.shields.io/badge/Progresso-80%25-brightgreen)
 
  📂 Estrutura do Projeto
 
@@ -149,7 +149,7 @@ Cliente: Anderson Silva
 
 ### 🚀 Ampliação Recomendada
 
-![Progresso](https://geps.dev/progress/20?style=for-the-badge&color=f1c40f)
+![20%](https://img.shields.io/badge/Progresso-20%25-yellow)
 
 📊 Ampliando o Projeto: Opções de Armazenamento 💾
 
