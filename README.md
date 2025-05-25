@@ -31,7 +31,7 @@ Sistema em desenvolvimento para gestão de serviços em barbearia com controle i
  🛠️ Tecnologias Utilizadas
 
 -  Python
-- Bibliotecas:
+-  Bibliotecas:
   - `pandas` para manipulação de dados
   - `logging` para registro de logs
   - `pathlib` e `os` para manipulação de arquivos
@@ -73,6 +73,7 @@ sair                         # Encerra o programa
 | platinado                 | 100,00     |
 | camuflagem_cabelo         | 20,00      |
 | camuflagem_barba          | 10,00      |
+
 ---
 
 
