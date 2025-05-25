@@ -151,9 +151,9 @@ Cliente: Anderson Silva
 
 🟩🟩⬜⬜⬜⬜⬜⬜⬜⬜ 20%
 
-📊 Ampliando o Projeto: Opções de Armazenamento 💾
+📊 Ampliando o Projeto: Opções de Armazenamento e apresentação dos dados em Dashboards 💾
 
-**Sistema atualmente compatível com adição de banco de dados**
+Sistema atualmente compatível com adição de banco de dados
 
 📊 Sistema atualmente compatível a Adição de banco de dados
 
@@ -177,11 +177,6 @@ Gera logs e CSVs (que podem ser substituídos por queries SQL ou chamadas à API
 🤝 Colaboração: Multiplos usuários podem ver/editarem tempo real
 🚀 Escalável: Suporta desde pequenas barbearias até redes grandes
 📱 Mobile-friendly: Visualização perfeita em celulares
-
-💻 Exemplo de pseudo código em python mostrando a simplicidade de integração
-import gspread
-creds = Credentials.from_service_account_file("credenciais.json")
-client = gspread.authorize(creds)  # Conexão feita em 2 linhas!
 
 🔍 Visão Geral
 Sistema completo para gerenciamento de barbearias com:
