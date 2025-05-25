@@ -146,11 +146,10 @@ Cliente: Anderson Silva
 - Local: /planilhas_de_servico/
 - Logs: /logs/servicos_barbearia.log
 
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Ampliação Recomendada <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-<div>
-  <img src="https://geps.dev/progress/20?style=for-the-badge&color=f1c40f">
-</div>
+### 🚀 Ampliação Recomendada
+
+![Progresso](https://geps.dev/progress/20?style=for-the-badge&color=f1c40f)
 
 📊 Ampliando o Projeto: Opções de Armazenamento 💾
 
