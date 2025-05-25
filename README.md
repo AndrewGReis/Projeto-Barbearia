@@ -1,3 +1,6 @@
+Desenvolvido por **Andrew Guedes Reis**  
+[🔗 LinkedIn]([https://www.(https://www.linkedin.com/in/andrew-guedes-reis-/)](https://www.linkedin.com/in/andrew-guedes-reis-/)) •
+
 # ✂️ Gerenciador de Serviços de Barbearia ✂️
 
 Sistema em desenvolvimento para gestão de serviços em barbearia com controle individual por cliente, relatórios financeiros detalhados e armazenamento seguro de dados.
