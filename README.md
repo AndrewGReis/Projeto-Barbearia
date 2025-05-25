@@ -148,7 +148,9 @@ Cliente: Anderson Silva
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Ampliação Recomendada <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-![Progresso](https://geps.dev/progress/100?style=for-the-badge&color=2ecc71)
+<div>
+  <img src="https://geps.dev/progress/20?style=for-the-badge&color=f1c40f">
+</div>
 
 📊 Ampliando o Projeto: Opções de Armazenamento 💾
 
