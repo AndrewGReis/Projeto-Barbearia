@@ -2,7 +2,7 @@
 
 Sistema em desenvolvimento para gestão de serviços em barbearia com controle individual por cliente, relatórios financeiros detalhados e armazenamento seguro de dados.
 
-🟩🟩🟩🟩🟩🟩🟩🟩⬜⬜ **80%**
+🟩🟩🟩🟩🟩🟩🟩🟩⬜⬜ 80%
 
  📂 Estrutura do Projeto
 
@@ -149,7 +149,7 @@ Cliente: Anderson Silva
 
 ### 🚀 Ampliação Recomendada
 
-🟩🟩⬜⬜⬜⬜⬜⬜⬜⬜ **20%**
+🟩🟩⬜⬜⬜⬜⬜⬜⬜⬜ 20%
 
 📊 Ampliando o Projeto: Opções de Armazenamento 💾
 
