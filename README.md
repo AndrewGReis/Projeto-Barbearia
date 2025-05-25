@@ -1,5 +1,8 @@
 Desenvolvido por **Andrew Guedes Reis**  
-[🔗 LinkedIn]([https://www.(https://www.linkedin.com/in/andrew-guedes-reis-/)](https://www.linkedin.com/in/andrew-guedes-reis-/)) •
+
+<a href="https://www.linkedin.com/in/andrew-guedes-reis-/" target="_blank" rel="noopener noreferrer">
+  <img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+</a>
 
 # ✂️ Gerenciador de Serviços de Barbearia ✂️
 
