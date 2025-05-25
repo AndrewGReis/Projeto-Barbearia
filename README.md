@@ -153,7 +153,7 @@ Cliente: Anderson Silva
 
 📊 Ampliando o Projeto: Opções de Armazenamento e apresentação dos dados em Dashboards 💾
 
-Sistema atualmente compatível com adição de banco de dados
+✔️ Sistema atualmente compatível com adição de banco de dados
 
 📊 Sistema atualmente compatível a Adição de banco de dados
 
