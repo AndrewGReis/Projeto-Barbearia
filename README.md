@@ -146,8 +146,7 @@ Cliente: Anderson Silva
 - Local: /planilhas_de_servico/
 - Logs: /logs/servicos_barbearia.log
 
-
-### 🚀 Ampliação Recomendada
+🚀 Ampliação Recomendada
 
 🟩🟩⬜⬜⬜⬜⬜⬜⬜⬜ 20%
 
