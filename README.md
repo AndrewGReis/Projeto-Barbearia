@@ -92,7 +92,7 @@ sair                         # Encerra o programa
   🧾🧾 Valor arrecadado: R$525.00
 
  🏆 DESTAQUES:  
- 👑 Cliente Top: André Silva (8 serviços)  
+ 👑 Cliente com mais serviços: André Silva (8 serviços)  
  💰 Maior Gasto: Anderson Silva (R$250.00) 
 
  🔍 Detalhamento por Cliente:
@@ -144,14 +144,7 @@ Cliente: Anderson Silva
   💾 Backup Automático  Salva dados antes de operações críticas 
   🛡️ Tratamento de Erros  Valida nomes e serviços em tempo real 
 
- 💾 Persistência de Dados
 
-  Estrutura de armazenamento:
-  
-- Formato: CSV com UTF-8-sig (Excel compatível)
-- Nomenclatura: balanco_diario[DDMMAAAA].csv
-- Local: /planilhas_de_servico/
-- Logs: /logs/servicos_barbearia.log
 
 🚀 Ampliação Recomendada
 
