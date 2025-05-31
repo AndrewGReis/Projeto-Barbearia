@@ -3,15 +3,12 @@ import random
 from datetime import datetime
 import os
 
-# NOVO: Adicionado import para ExcelWriter
 from pandas import ExcelWriter
 
-# Configurações de pastas (MODIFICADO: removida variável CSV)
 PASTA_PLANILHAS = "planilhas_de_servico"
-NOME_ARQUIVO = f"balanco_diario_{datetime.now().strftime('%d%m%Y')}.xlsx"  # MODIFICADO: .xlsx em vez de .csv
+NOME_ARQUIVO = f"balanco_diario_{datetime.now().strftime('%d%m%Y')}.xlsx"
 CAMINHO_ARQUIVO = os.path.join(PASTA_PLANILHAS, NOME_ARQUIVO)
 
-# Listas de dados (mantidas as mesmas)
 NOMES = [
     "João", "Maria", "Pedro", "Ana", "Lucas", "Carla", "Marcos", "Juliana", 
     "Fernando", "Patrícia", "Rafael", "Amanda", "Daniel", "Tatiane", "Gustavo",
@@ -47,7 +44,7 @@ def gerar_dados_ficticios(num_registros=50):
     """Gera um arquivo Excel com dados fictícios."""
     dados = []
     servicos_disponiveis = list(SERVICOS_PREDEFINIDOS.keys())
-    data_atual = datetime.now().strftime("%d/%m/%Y")  # MODIFICADO: Data única para todos
+    data_atual = datetime.now().strftime("%d/%m/%Y")
     
     for _ in range(num_registros):
         nome = f"{random.choice(NOMES)} {random.choice(SOBRENOMES)}"
@@ -61,16 +58,14 @@ def gerar_dados_ficticios(num_registros=50):
                 "Servico": servico,
                 "Preco": SERVICOS_PREDEFINIDOS[servico],
                 "Quantidade": random.randint(1, 2),
-                "Data": data_atual  # MODIFICADO: Usa a data atual fixa
+                "Data": data_atual 
             })
     
     df = pd.DataFrame(dados)
     
-    # Garante a ordem das colunas
     colunas = ["Cliente", "Idade", "Servico", "Preco", "Quantidade", "Data"]
     df = df[colunas]
     
-    # NOVO: Geração direta de arquivo Excel
     try:
         os.makedirs(PASTA_PLANILHAS, exist_ok=True)
         with ExcelWriter(CAMINHO_ARQUIVO, engine='openpyxl', datetime_format='DD/MM/YYYY') as writer:
