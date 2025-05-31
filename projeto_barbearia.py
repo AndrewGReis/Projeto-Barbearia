@@ -47,7 +47,7 @@ SERVICOS_PREDEFINIDOS = {
 }
 
 def selecionar_arquivo() -> str:
-    """Gerencia a seleção/criação do arquivo CSV com opção numérica"""
+    """Gerencia a seleção/criação do arquivo CSV (igual ao anterior)"""
     global ARQUIVO_SELECIONADO
     os.makedirs(PASTA_PLANILHAS, exist_ok=True)
     
@@ -76,7 +76,6 @@ def selecionar_arquivo() -> str:
     logger.info(f"Novo arquivo criado: {ARQUIVO_SELECIONADO}")
     return ARQUIVO_SELECIONADO
 
-
 def salvar_servicos(df: pd.DataFrame):
     try:
         global ARQUIVO_SELECIONADO
@@ -85,8 +84,8 @@ def salvar_servicos(df: pd.DataFrame):
             ARQUIVO_SELECIONADO,
             mode='w',
             index=False,
-            columns=['Cliente', 'Servico', 'Preco', 'Quantidade'],
-            header=['Cliente', 'Serviço', 'Preço (R$)', 'Quantidade'],
+            columns=['Cliente', 'Idade', 'Servico', 'Preco', 'Quantidade', 'Data'],
+            header=['Cliente', 'Idade', 'Serviço', 'Preço (R$)', 'Quantidade', 'Data'],
             encoding='utf-8-sig'
         )
     except Exception as e:
@@ -94,7 +93,7 @@ def salvar_servicos(df: pd.DataFrame):
         raise
 
 def inicializar_base_dados() -> pd.DataFrame:
-    """Inicializa o DataFrame, verificando arquivo existente ou criando novo"""
+    """Inicializa o DataFrame com as novas colunas"""
     database_path = selecionar_arquivo()
     
     if Path(database_path).exists():
@@ -106,11 +105,13 @@ def inicializar_base_dados() -> pd.DataFrame:
             if 'cliente' in df.columns:
                 df = df.rename(columns={
                     'cliente': 'Cliente',
+                    'idade': 'Idade',
                     'serviço': 'Servico',
                     'preço (r$)': 'Preco',
-                    'quantidade': 'Quantidade'
+                    'quantidade': 'Quantidade',
+                    'data': 'Data'
                 })
-                return df[['Cliente', 'Servico', 'Preco', 'Quantidade']]
+                return df[['Cliente', 'Idade', 'Servico', 'Preco', 'Quantidade', 'Data']]  # NOVO
             else:
                 df = df.rename(columns={
                     'serviço': 'Servico',
@@ -118,17 +119,19 @@ def inicializar_base_dados() -> pd.DataFrame:
                     'quantidade': 'Quantidade'
                 })
                 df['Cliente'] = 'Geral'
-                return df[['Cliente', 'Servico', 'Preco', 'Quantidade']]
+                df['Idade'] = 0
+                df['Data'] = datetime.now().strftime("%d/%m/%Y")
+                return df[['Cliente', 'Idade', 'Servico', 'Preco', 'Quantidade', 'Data']]
         except Exception as e:
             logger.error(f"Erro ao carregar arquivo existente: {e}")
             print(f"\n❌❌ Erro ao carregar arquivo existente. \nCriando novo...✅✅")
-            return pd.DataFrame(columns=['Cliente', 'Servico', 'Preco', 'Quantidade'])
+            return pd.DataFrame(columns=['Cliente', 'Idade', 'Servico', 'Preco', 'Quantidade', 'Data'])
     else:
         logger.info(f"Arquivo {database_path} nao encontrado. Novo sera criado.")
         print(f"\n🆕 Criando novo arquivo: {os.path.basename(database_path)}")
-        return pd.DataFrame(columns=['Cliente', 'Servico', 'Preco', 'Quantidade'])
+        return pd.DataFrame(columns=['Cliente', 'Idade', 'Servico', 'Preco', 'Quantidade', 'Data'])
 
-def adicionar_cliente_servico(cliente: str, servico: str, df: pd.DataFrame) -> pd.DataFrame:
+def adicionar_cliente_servico(cliente: str, idade: int, servico: str, df: pd.DataFrame) -> pd.DataFrame:
     try:
         servico_lower = servico.lower()
         if servico_lower not in SERVICOS_PREDEFINIDOS:
@@ -138,19 +141,19 @@ def adicionar_cliente_servico(cliente: str, servico: str, df: pd.DataFrame) -> p
             return df
 
         preco = SERVICOS_PREDEFINIDOS[servico_lower]
-        logger.info(f"Registrando servico: {cliente} - {servico} - R${preco:.2f}")
+        logger.info(f"Registrando servico: {cliente} (Idade: {idade}) - {servico} - R${preco:.2f}")
         
         mask = (df['Cliente'].str.lower() == cliente.lower()) & (df['Servico'].str.lower() == servico_lower)
         
         if not df[mask].empty:
             idx = df[mask].index[0]
             df.at[idx, 'Quantidade'] += 1
-            print(f"+1 serviço para {cliente}: {servico} (Total: {df.at[idx, 'Quantidade']}x)")
+            print(f"+1 serviço para {cliente} ({idade} anos): {servico} (Total: {df.at[idx, 'Quantidade']}x)")
         else:
-            novo_servico = pd.DataFrame([[cliente, servico, preco, 1]], 
-                                      columns=['Cliente', 'Servico', 'Preco', 'Quantidade'])
+            novo_servico = pd.DataFrame([[cliente, idade, servico, preco, 1, datetime.now().strftime("%d/%m/%Y")]],  # NOVO
+                                      columns=['Cliente', 'Idade', 'Servico', 'Preco', 'Quantidade', 'Data'])  # NOVO
             df = pd.concat([df, novo_servico], ignore_index=True)
-            print(f"Serviço registrado para {cliente}: {servico} (1x)")
+            print(f"Serviço registrado para {cliente} ({idade} anos): {servico} (1x)")
         return df
     except Exception as e:
         logger.error(f"Erro ao registrar servico: {e}")
@@ -163,10 +166,11 @@ def remover_ultimo_servico(df: pd.DataFrame) -> pd.DataFrame:
             return df
         ultimo_idx = df.index[-1]
         cliente = df.at[ultimo_idx, 'Cliente']
+        idade = df.at[ultimo_idx, 'Idade']
         servico = df.at[ultimo_idx, 'Servico']
         df.drop(ultimo_idx, inplace=True)
-        print(f"\nServiço '{servico}' do cliente '{cliente}' removido com sucesso!")
-        logger.info(f"Servico removido: {cliente} - {servico}")
+        print(f"\nServiço '{servico}' do cliente '{cliente}' ({idade} anos) removido com sucesso!")
+        logger.info(f"Servico removido: {cliente} (Idade: {idade}) - {servico}")
         return df.reset_index(drop=True)
     except Exception as e:
         logger.error(f"Erro ao remover servico: {e}")
@@ -188,8 +192,9 @@ def listar_servicos(df: pd.DataFrame):
         for cliente in clientes:
             cliente_df = df[df['Cliente'] == cliente]
             total_cliente = cliente_df['Total'].sum()
+            idade = cliente_df.iloc[0]['Idade']
             
-            print(f"\nCliente: {cliente}")
+            print(f"\nCliente: {cliente} (Idade: {idade} anos)")
             print("{:<25} {:<10} {:<10} {:<10}".format('SERVIÇO', 'PREÇO', 'QTD', 'TOTAL'))
             print("-" * 55)
             for _, row in cliente_df.iterrows():
@@ -222,10 +227,14 @@ def resumo_diario(df: pd.DataFrame):
         print("\n═══════════════════════════════")
         print("      ✂️  RESUMO DE SERVIÇOS ATÉ O MOMENTO ✂️      ")
         print("═══════════════════════════════")
-        print(f"\n📋📋 Total de serviços: {int(total_servicos)}")
-        print(f"\n🧾🧾 Valor arrecadado: R${float(total_arrecadado):.2f}")
+        print(f"\n📋 Total de serviços: {int(total_servicos)}")
+        print(f"💰 Valor arrecadado: R${float(total_arrecadado):.2f}")
+
+        print("\n📊 Distribuição por Idade:")
+        print(df['Idade'].value_counts().sort_index())
 
         clientes_destaque = df.groupby('Cliente').agg({
+            'Idade': 'first',
             'Quantidade': 'sum',
             'Preco': lambda x: (x * df.loc[x.index, 'Quantidade']).sum()
         }).rename(columns={'Preco': 'TotalGasto'})
@@ -233,24 +242,16 @@ def resumo_diario(df: pd.DataFrame):
         if not clientes_destaque.empty:
             cliente_mais_servicos = clientes_destaque['Quantidade'].idxmax()
             qtd_mais_servicos = clientes_destaque['Quantidade'].max()
+            idade_mais_servicos = clientes_destaque.loc[cliente_mais_servicos, 'Idade']
             
             cliente_maior_gasto = clientes_destaque['TotalGasto'].idxmax()
             total_maior_gasto = clientes_destaque['TotalGasto'].max()
+            idade_maior_gasto = clientes_destaque.loc[cliente_maior_gasto, 'Idade']
             
             print("\n🏆 DESTAQUES DO DIA:")
-            print(f"👑 Cliente com mais serviços: {cliente_mais_servicos} ({int(qtd_mais_servicos)} serviços)")
-            print(f"💰 Cliente com maior gasto: {cliente_maior_gasto} (R${float(total_maior_gasto):.2f})")
+            print(f"👑 Cliente com mais serviços: {cliente_mais_servicos} (Idade: {idade_mais_servicos}, {int(qtd_mais_servicos)} serviços)")
+            print(f"💰 Cliente com maior gasto: {cliente_maior_gasto} (Idade: {idade_maior_gasto}, R${float(total_maior_gasto):.2f})")
 
-        clientes = df['Cliente'].unique()
-        print("\n📋📋 Serviços por cliente:")
-        for cliente in clientes:
-            cliente_df = df[df['Cliente'] == cliente]
-            total_cliente = (cliente_df['Preco'] * cliente_df['Quantidade']).sum()
-            print(f"\nCliente: {cliente}")
-            for _, row in cliente_df.iterrows():
-                print(f" - {row['Servico']}: {int(row['Quantidade'])}x (R${float(row['Preco']):.2f} cada)")
-            print(f"Total do cliente: R${float(total_cliente):.2f}")
-        
         print("\n═══════════════════════════════")
     except Exception as e:
         logger.error(f"Erro ao gerar resumo: {e}")
@@ -260,16 +261,12 @@ def mostrar_ajuda():
     help_text = """
 ✂️  GERENCIADOR DE BARBEARIA - COMANDOS: ✂️
 
-add "Nome Completo" servico *Registra um serviço para um cliente
-remover                     *Remove o último serviço adicionado
-list                        *Mostra lista detalhada por cliente
-resumo                      *Mostra resumo financeiro com destaques
-help                        *Mostra esta ajuda
-sair                        *Encerra o programa
-
-Exemplos:
-add "Andrew Reis" corte_masculino
-add "Gustavo Lima" barba
+add "Nome Completo" idade servico  *Registra um serviço (ex: add "João" 35 corte_masculino)
+remover                            *Remove o último serviço adicionado
+list                               *Mostra lista detalhada por cliente
+resumo                             *Mostra resumo financeiro com destaques
+help                               *Mostra esta ajuda
+sair                               *Encerra o programa
 
 SERVIÇOS PRÉ-DEFINIDOS:"""
     for servico, preco in SERVICOS_PREDEFINIDOS.items():
@@ -277,7 +274,7 @@ SERVIÇOS PRÉ-DEFINIDOS:"""
     print(help_text)
 
 def main():
-    logger.info("===  Sistema de Barbearia Iniciado   ===")
+    logger.info("=== Sistema de Barbearia Iniciado ===")
     df = inicializar_base_dados()
 
     print("\n=== ✂️  GERENCIADOR DE BARBEARIA ✂️  ===")
@@ -298,7 +295,7 @@ def main():
 
             if loop_count >= MAX_LOOPS:
                 logger.error("Limite maximo de loops atingido! Encerrando por seguranca.")
-                print("\n❌❌ Limite de operações excedido. \nReinicie o programa.🛡️ 🛡️")
+                print("\n❌ Limite de operações excedido. Reinicie o programa. 🛡️")
                 salvar_servicos(df)
                 break
 
@@ -332,15 +329,20 @@ def main():
                 parts = user_input[len('add '):].strip().split('"')
                 if len(parts) >= 3:
                     cliente = parts[1].strip()
-                    servico = parts[2].strip()
-                    if cliente and servico:
-                        df = adicionar_cliente_servico(cliente, servico, df)
-                        salvar_servicos(df)
-                        loop_count = 0
+                    idade_servico = parts[2].strip().split()
+                    if len(idade_servico) >= 2:
+                        try:
+                            idade = int(idade_servico[0])
+                            servico = idade_servico[1]
+                            df = adicionar_cliente_servico(cliente, idade, servico, df)
+                            salvar_servicos(df)
+                            loop_count = 0
+                        except ValueError:
+                            print("❌ Idade deve ser um número. Ex: add \"Maria\" 25 barba")
                     else:
-                        print("❌ Formato incorreto. Uso: add \"Nome Completo\" servico ✅")
+                        print("❌ Formato incorreto. Uso: add \"Nome\" idade servico")
                 else:
-                    print("❌ Formato incorreto. Uso: add \"Nome Completo\" servico ✅")
+                    print("❌ Formato incorreto. Uso: add \"Nome\" idade servico")
             else:
                 logger.warning(f"Comando nao reconhecido: {user_input}")
                 print("Comando não reconhecido. Digite 'help' para ajuda.")
