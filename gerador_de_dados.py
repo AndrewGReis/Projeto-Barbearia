@@ -10,17 +10,53 @@ NOME_ARQUIVO = f"balanco_diario_{datetime.now().strftime('%d%m%Y')}.xlsx"
 CAMINHO_ARQUIVO = os.path.join(PASTA_PLANILHAS, NOME_ARQUIVO)
 
 NOMES = [
-    "João", "Maria", "Pedro", "Ana", "Lucas", "Carla", "Marcos", "Juliana", 
-    "Fernando", "Patrícia", "Rafael", "Amanda", "Daniel", "Tatiane", "Gustavo",
-    "Bruna", "Rodrigo", "Camila", "Felipe", "Aline", "André", "Vanessa", "Roberto", 
-    "Isabela", "Ricardo", "Laura", "Thiago", "Larissa", "Eduardo", "Mariana"
+    "James", "John", "Robert", "Michael", "William",
+    "David", "Richard", "Joseph", "Thomas", "Charles",
+    "Mary", "Patricia", "Jennifer", "Linda", "Elizabeth",
+    "Barbara", "Susan", "Jessica", "Sarah", "Karen",
+    "João", "Maria", "Pedro", "Ana", "Lucas",
+    "Carla", "Marcos", "Juliana", "Fernando", "Patrícia",
+    "Rafael", "Amanda", "Daniel", "Tatiane", "Gustavo",
+    "Bruna", "Rodrigo", "Camila", "Felipe", "Aline",
+    "André", "Vanessa", "Roberto", "Isabela", "Ricardo",
+    "Laura", "Thiago", "Larissa", "Eduardo", "Mariana",
+    "James", "John", "Robert", "Michael", "William",
+    "David", "Richard", "Joseph", "Thomas", "Charles",
+    "Mary", "Patricia", "Jennifer", "Linda", "Elizabeth",
+    "Barbara", "Susan", "Jessica", "Sarah", "Karen",
+    "João", "Maria", "Pedro", "Ana", "Lucas",
+    "Carla", "Marcos", "Juliana", "Fernando", "Patrícia",
+    "Rafael", "Amanda", "Daniel", "Tatiane", "Gustavo",
+    "Bruna", "Rodrigo", "Camila", "Felipe", "Aline",
+    "André", "Vanessa", "Roberto", "Isabela", "Ricardo",
+    "Laura", "Thiago", "Larissa", "Eduardo", "Mariana",
+    "Heitor", "Helena", "Arthur", "Alice", "Davi",
+    "Laura", "Gabriel", "Manuela", "Lorenzo", "Valentina",
+    "Bernardo", "Sophia", "Matheus", "Isabella", "Rafael",
+    "Heloísa", "Joaquim", "Luiza", "Nicolas", "Lorena",
+    "Samuel", "Lívia", "Henrique", "Maria Clara", "Guilherme",
+    "Cecília", "Felipe", "Eloá", "Benjamin", "Marina",
+    "Vicente", "Agatha", "Leonardo", "Lara", "Vitor",
+    "Beatriz", "Eduarda", "Yasmin", "Otávio", "Clara",
+    "Cauã", "Isadora", "Antônio", "Luna", "Breno",
+    "Ana Clara", "Danilo", "Maitê", "Raul", "Ana Luiza"
 ]
 
 SOBRENOMES = [
+    "Smith", "Johnson", "Williams", "Brown", "Jones",
+    "Garcia", "Miller", "Davis", "Rodriguez", "Martinez",
+    "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson",
+    "Thomas", "Taylor", "Moore", "Jackson", "Martin",
+    "Lee", "Perez", "Thompson", "White", "Harris",
+    "Sanchez", "Clark", "Ramirez", "Lewis", "Robinson",
+    "Walker", "Young", "Allen", "King", "Wright",
+    "Scott", "Torres", "Nguyen", "Hill", "Flores",
     "Silva", "Santos", "Oliveira", "Souza", "Rodrigues", "Ferreira", "Alves",
     "Pereira", "Gomes", "Costa", "Martins", "Ribeiro", "Carvalho", "Lima", "Monteiro",
     "Almeida", "Nascimento", "Mendes", "Barbosa", "Rocha", "Cunha", "Moreira",
-    "Cardoso", "Teixeira", "Dias", "Freitas", "Correia", "Moraes", "Castro", "Araújo"
+    "Cardoso", "Teixeira", "Dias", "Freitas", "Correia", "Moraes", "Castro", "Araújo",
+    "Andrade", "Bastos", "Câmara", "Dorneles", "Espinosa",
+    "Fontes", "Galvão", "Holanda", "Ibrahim", "Jordão"
 ]
 
 SERVICOS_PREDEFINIDOS = {
@@ -40,7 +76,7 @@ SERVICOS_PREDEFINIDOS = {
     'camuflagem_barba': 10
 }
 
-def gerar_dados_ficticios(num_registros=50):
+def gerar_dados_ficticios(num_registros=100):
     """Gera um arquivo Excel com dados fictícios."""
     dados = []
     servicos_disponiveis = list(SERVICOS_PREDEFINIDOS.keys())
@@ -79,4 +115,4 @@ def gerar_dados_ficticios(num_registros=50):
         print(f"❌ Erro ao gerar arquivo: {e}")
 
 if __name__ == "__main__":
-    gerar_dados_ficticios(num_registros=50)
+    gerar_dados_ficticios(num_registros=100)
