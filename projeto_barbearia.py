@@ -3,30 +3,17 @@ import logging
 from pathlib import Path
 import os
 from datetime import datetime
+from pandas import ExcelWriter
+
 
 PASTA_PLANILHAS = "planilhas_de_servico"
 PASTA_LOGS = "logs"
 DATA_ATUAL = datetime.now().strftime("%d%m%Y")
-NOME_ARQUIVO_PADRAO = f"balanco_diario{DATA_ATUAL}.csv"
+NOME_ARQUIVO_PADRAO = f"balanco_diario{DATA_ATUAL}.xlsx"
 CAMINHO_COMPLETO = os.path.join(PASTA_PLANILHAS, NOME_ARQUIVO_PADRAO)
 NOME_ARQUIVO_LOG = f"servicos_barbearia_{DATA_ATUAL}.log"
 ARQUIVO_LOG = os.path.join(PASTA_LOGS, NOME_ARQUIVO_LOG)
 ARQUIVO_SELECIONADO = None
-
-def configurar_logging():
-    """Configura o sistema de logging com arquivo diário"""
-    os.makedirs(PASTA_LOGS, exist_ok=True)
-    filemode = 'a' if Path(ARQUIVO_LOG).exists() else 'w'
-    
-    logging.basicConfig(
-        filename=ARQUIVO_LOG,
-        filemode=filemode,
-        level=logging.DEBUG,
-        format='%(asctime)s - %(name)s - %(levelname)s - %(funcName)s - %(message)s'
-    )
-    return logging.getLogger()
-
-logger = configurar_logging()
 
 
 SERVICOS_PREDEFINIDOS = {
@@ -46,13 +33,29 @@ SERVICOS_PREDEFINIDOS = {
     'camuflagem_barba': 10
 }
 
+
+def configurar_logging():
+    """Configura o sistema de logging com arquivo diário"""
+    os.makedirs(PASTA_LOGS, exist_ok=True)
+    filemode = 'a' if Path(ARQUIVO_LOG).exists() else 'w'
+    
+    logging.basicConfig(
+        filename=ARQUIVO_LOG,
+        filemode=filemode,
+        level=logging.DEBUG,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(funcName)s - %(message)s'
+    )
+    return logging.getLogger()
+
+logger = configurar_logging()
+
 def selecionar_arquivo() -> str:
-    """Gerencia a seleção/criação do arquivo CSV (igual ao anterior)"""
+    """Gerencia a seleção/criação do arquivo (MODIFICADO para .xlsx)"""
     global ARQUIVO_SELECIONADO
     os.makedirs(PASTA_PLANILHAS, exist_ok=True)
     
     arquivos_existentes = [f for f in os.listdir(PASTA_PLANILHAS) 
-                         if f.startswith("balanco_diario") and f.endswith(".csv")]
+                         if f.startswith("balanco_diario") and f.endswith(".xlsx")]
     arquivos_existentes.sort(reverse=True)
     
     if arquivos_existentes:
@@ -77,59 +80,60 @@ def selecionar_arquivo() -> str:
     return ARQUIVO_SELECIONADO
 
 def salvar_servicos(df: pd.DataFrame):
+    """Salva em Excel (MODIFICADO completamente)"""
     try:
         global ARQUIVO_SELECIONADO
-        logger.info(f"✅ Salvando servicos no arquivo {ARQUIVO_SELECIONADO}")
-        df.to_csv(
-            ARQUIVO_SELECIONADO,
-            mode='w',
-            index=False,
-            columns=['Cliente', 'Idade', 'Servico', 'Preco', 'Quantidade', 'Data'],
-            header=['Cliente', 'Idade', 'Serviço', 'Preço (R$)', 'Quantidade', 'Data'],
-            encoding='utf-8-sig'
-        )
+        logger.info(f"✅ Salvando servicos em: {ARQUIVO_SELECIONADO}")
+        
+        colunas = ['Cliente', 'Idade', 'Servico', 'Preco', 'Quantidade', 'Data']
+        df = df[colunas]
+        
+        with ExcelWriter(ARQUIVO_SELECIONADO, engine='openpyxl', datetime_format='DD/MM/YYYY') as writer:
+            df.to_excel(writer, index=False, sheet_name='Servicos')
+        
+        print(f"Arquivo Excel atualizado: {os.path.basename(ARQUIVO_SELECIONADO)}")
+        
     except Exception as e:
         logger.error(f"Falha ao salvar servicos: {e}")
         raise
 
 def inicializar_base_dados() -> pd.DataFrame:
-    """Inicializa o DataFrame com as novas colunas"""
+    """Carrega dados existentes (MODIFICADO para Excel)"""
     database_path = selecionar_arquivo()
     
     if Path(database_path).exists():
         try:
             logger.info(f"Carregando servicos do arquivo {database_path}")
-            df = pd.read_csv(database_path, encoding='utf-8-sig')
+            df = pd.read_excel(database_path, engine='openpyxl')
+            
             df.columns = df.columns.str.strip().str.lower()
             
-            if 'cliente' in df.columns:
+            colunas_necessarias = ['cliente', 'servico', 'preco', 'quantidade']
+            if all(col in df.columns for col in colunas_necessarias):
                 df = df.rename(columns={
                     'cliente': 'Cliente',
-                    'idade': 'Idade',
-                    'serviço': 'Servico',
-                    'preço (r$)': 'Preco',
-                    'quantidade': 'Quantidade',
-                    'data': 'Data'
-                })
-                return df[['Cliente', 'Idade', 'Servico', 'Preco', 'Quantidade', 'Data']]  # NOVO
-            else:
-                df = df.rename(columns={
-                    'serviço': 'Servico',
-                    'preço (r$)': 'Preco',
+                    'servico': 'Servico',
+                    'preco': 'Preco',
                     'quantidade': 'Quantidade'
                 })
-                df['Cliente'] = 'Geral'
-                df['Idade'] = 0
-                df['Data'] = datetime.now().strftime("%d/%m/%Y")
+                
+                if 'idade' not in df.columns:
+                    df['Idade'] = 0
+                if 'data' not in df.columns:
+                    df['Data'] = datetime.now().strftime("%d/%m/%Y")
+                
                 return df[['Cliente', 'Idade', 'Servico', 'Preco', 'Quantidade', 'Data']]
+            else:
+                raise ValueError("Arquivo com formato inválido")
+                
         except Exception as e:
-            logger.error(f"Erro ao carregar arquivo existente: {e}")
-            print(f"\n❌❌ Erro ao carregar arquivo existente. \nCriando novo...✅✅")
+            logger.error(f"Erro ao carregar arquivo: {e}")
+            print("\n❌ Erro ao carregar arquivo. Criando novo...")
             return pd.DataFrame(columns=['Cliente', 'Idade', 'Servico', 'Preco', 'Quantidade', 'Data'])
     else:
-        logger.info(f"Arquivo {database_path} nao encontrado. Novo sera criado.")
-        print(f"\n🆕 Criando novo arquivo: {os.path.basename(database_path)}")
+        logger.info("Arquivo nao encontrado. Novo sera criado.")
         return pd.DataFrame(columns=['Cliente', 'Idade', 'Servico', 'Preco', 'Quantidade', 'Data'])
+
 
 def adicionar_cliente_servico(cliente: str, idade: int, servico: str, df: pd.DataFrame) -> pd.DataFrame:
     try:
@@ -150,8 +154,8 @@ def adicionar_cliente_servico(cliente: str, idade: int, servico: str, df: pd.Dat
             df.at[idx, 'Quantidade'] += 1
             print(f"+1 serviço para {cliente} ({idade} anos): {servico} (Total: {df.at[idx, 'Quantidade']}x)")
         else:
-            novo_servico = pd.DataFrame([[cliente, idade, servico, preco, 1, datetime.now().strftime("%d/%m/%Y")]],  # NOVO
-                                      columns=['Cliente', 'Idade', 'Servico', 'Preco', 'Quantidade', 'Data'])  # NOVO
+            novo_servico = pd.DataFrame([[cliente, idade, servico, preco, 1, datetime.now().strftime("%d/%m/%Y")]],
+                                      columns=['Cliente', 'Idade', 'Servico', 'Preco', 'Quantidade', 'Data'])
             df = pd.concat([df, novo_servico], ignore_index=True)
             print(f"Serviço registrado para {cliente} ({idade} anos): {servico} (1x)")
         return df
@@ -164,13 +168,16 @@ def remover_ultimo_servico(df: pd.DataFrame) -> pd.DataFrame:
         if df.empty:
             print("\nNenhum serviço registrado para remover!")
             return df
+        
         ultimo_idx = df.index[-1]
         cliente = df.at[ultimo_idx, 'Cliente']
         idade = df.at[ultimo_idx, 'Idade']
         servico = df.at[ultimo_idx, 'Servico']
+        
         df.drop(ultimo_idx, inplace=True)
         print(f"\nServiço '{servico}' do cliente '{cliente}' ({idade} anos) removido com sucesso!")
         logger.info(f"Servico removido: {cliente} (Idade: {idade}) - {servico}")
+        
         return df.reset_index(drop=True)
     except Exception as e:
         logger.error(f"Erro ao remover servico: {e}")
@@ -272,6 +279,7 @@ SERVIÇOS PRÉ-DEFINIDOS:"""
     for servico, preco in SERVICOS_PREDEFINIDOS.items():
         help_text += f"\n - {servico}: R${preco:.2f}"
     print(help_text)
+
 
 def main():
     logger.info("=== Sistema de Barbearia Iniciado ===")
