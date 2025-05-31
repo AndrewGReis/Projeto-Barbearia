@@ -29,7 +29,7 @@ Sistema em desenvolvimento para gestão de serviços em barbearia com controle i
 
   📝  Registro de serviços com preços pré-definidos 
   🔄  Incremento automático de quantidade para serviços repetidos 
-  🗑️  Opção de Remoção de último serviço adicionado 
+  🗑️  Opção de Remoção do último serviço adicionado 
   📊  Relatórios detalhados em formato de tabela 
   💾  Armazenamento em CSV com compatibilidade Excel 
   📌  Sistema completo de logs de operações 
