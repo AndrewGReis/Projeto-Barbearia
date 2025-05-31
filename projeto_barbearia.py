@@ -138,7 +138,7 @@ def adicionar_cliente_servico(cliente: str, servico: str, df: pd.DataFrame) -> p
             return df
 
         preco = SERVICOS_PREDEFINIDOS[servico_lower]
-        logger.info(f"Registrando serviço: {cliente} - {servico} - R${preco:.2f}")
+        logger.info(f"Registrando servico: {cliente} - {servico} - R${preco:.2f}")
         
         mask = (df['Cliente'].str.lower() == cliente.lower()) & (df['Servico'].str.lower() == servico_lower)
         
@@ -260,12 +260,12 @@ def mostrar_ajuda():
     help_text = """
 ✂️  GERENCIADOR DE BARBEARIA - COMANDOS: ✂️
 
-add "Nome Completo" servico  Registra um serviço para um cliente
-remover                     Remove o último serviço adicionado
-list                        Mostra lista detalhada por cliente
-resumo                      Mostra resumo financeiro com destaques
-help                        Mostra esta ajuda
-sair                        Encerra o programa
+add "Nome Completo" servico *Registra um serviço para um cliente
+remover                     *Remove o último serviço adicionado
+list                        *Mostra lista detalhada por cliente
+resumo                      *Mostra resumo financeiro com destaques
+help                        *Mostra esta ajuda
+sair                        *Encerra o programa
 
 Exemplos:
 add "Andrew Reis" corte_masculino
@@ -321,7 +321,7 @@ def main():
                 salvar_servicos(df)
                 loop_count = 0
             elif user_input.lower() == 'list':
-                logger.info("Listagem de serviços solicitada")
+                logger.info("Listagem de servicos solicitada")
                 listar_servicos(df)
                 loop_count = 0
             elif user_input.lower() == 'resumo':
