@@ -44,7 +44,7 @@ Sistema em desenvolvimento para gestão de serviços em barbearia com controle i
 
  💾 Estrutura de armazenamento:
 
-- Formato: CSV com UTF-8-sig (Excel compatível)
+- Formato: XLSX (Excel compatível)
 - Nomenclatura: balanco_diario[DDMMAAAA].csv
 - Local: /planilhas_de_servico/
 - Logs: /logs/servicos_barbearia.log
